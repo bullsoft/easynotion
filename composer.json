@@ -45,37 +45,6 @@
         "EasyNotion\\Tests\\": "tests/"
       }
     },
-    "extra": {
-      "hooks": {
-        "pre-commit": [
-          "composer check-style",
-          "composer psalm",
-          "composer test"
-        ],
-        "pre-push": [
-          "composer check-style"
-        ]
-      }
-    },
-    "scripts": {
-      "post-update-cmd": [
-        "cghooks remove",
-        "cghooks add --ignore-lock",
-        "cghooks update"
-      ],
-      "post-merge": "composer install",
-      "post-install-cmd": [
-        "cghooks remove",
-        "cghooks add --ignore-lock",
-        "cghooks update"
-      ],
-      "phpstan": "phpstan analyse",
-      "check-style": "php-cs-fixer fix --using-cache=no --diff --config=.php-cs-fixer.dist.php --dry-run --allow-risky=yes --ansi",
-      "fix-style": "php-cs-fixer fix --using-cache=no --config=.php-cs-fixer.dist.php --allow-risky=yes --ansi",
-      "test": "phpunit --colors",
-      "psalm": "psalm --show-info=true --no-cache",
-      "psalm-fix": "psalm --no-cache --alter --issues=MissingReturnType,MissingParamType"
-    },
     "config": {
       "allow-plugins": {
         "composer/package-versions-deprecated": true
