@@ -1,0 +1,84 @@
+{
+    "name": "bullsoft/easynotion",
+    "description": "Notion SDK",
+    "keywords": [
+      "notion",
+      "notion sdk",
+      "notion sdk for php",
+      "notion-sdk",
+      "sdk"
+    ],
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Weigang Gu",
+        "email": "guweigang@bullsoft.org"
+      }
+    ],
+    "require": {
+      "php": ">=8.1.0",
+      "ext-fileinfo": "*",
+      "ext-openssl": "*",
+      "ext-simplexml": "*",
+      "ext-sodium": "*",
+      "ext-libxml": "*",
+      "ext-curl": "*",
+      "monolog/monolog": "^2.2",
+      "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+      "friendsofphp/php-cs-fixer": "^3.5.0",
+      "brainmaestro/composer-git-hooks": "^2.8",
+      "mikey179/vfsstream": "^1.6",
+      "mockery/mockery": "^1.4.4",
+      "phpstan/phpstan": "^1.0",
+      "phpunit/phpunit": "^9.5",
+      "vimeo/psalm": "^4.10"
+    },
+    "autoload": {
+      "psr-4": {
+        "EasyNotion\\": "src/EasyNotion/"
+      }
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "EasyNotion\\Tests\\": "tests/"
+      }
+    },
+    "extra": {
+      "hooks": {
+        "pre-commit": [
+          "composer check-style",
+          "composer psalm",
+          "composer test"
+        ],
+        "pre-push": [
+          "composer check-style"
+        ]
+      }
+    },
+    "scripts": {
+      "post-update-cmd": [
+        "cghooks remove",
+        "cghooks add --ignore-lock",
+        "cghooks update"
+      ],
+      "post-merge": "composer install",
+      "post-install-cmd": [
+        "cghooks remove",
+        "cghooks add --ignore-lock",
+        "cghooks update"
+      ],
+      "phpstan": "phpstan analyse",
+      "check-style": "php-cs-fixer fix --using-cache=no --diff --config=.php-cs-fixer.dist.php --dry-run --allow-risky=yes --ansi",
+      "fix-style": "php-cs-fixer fix --using-cache=no --config=.php-cs-fixer.dist.php --allow-risky=yes --ansi",
+      "test": "phpunit --colors",
+      "psalm": "psalm --show-info=true --no-cache",
+      "psalm-fix": "psalm --no-cache --alter --issues=MissingReturnType,MissingParamType"
+    },
+    "config": {
+      "allow-plugins": {
+        "composer/package-versions-deprecated": true
+      }
+    }
+  }
