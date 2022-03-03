@@ -16,8 +16,11 @@ class ParentObject
 
     public function setValue(array $map): static
     {
+        $val = $map[$this->type->value];
         match($this->type) {
-            ParentType::Page => $this->page_id = $map[$this->type->value],
+            ParentType::Page      => $this->page_id = $val,
+            ParentType::Database  => $this->database_id = $val,
+            ParentType::Workspace => $this->workspace = $val,
         };
         return $this;
     }

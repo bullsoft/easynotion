@@ -1,7 +1,7 @@
 <?php
 namespace EasyNotion\Entity;
 
-class Reference
+class Reference extends AbstractObject
 {
     public Type $object;
     public string $id;

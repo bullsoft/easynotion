@@ -9,6 +9,6 @@ class Bot
 
     public function __construct(array $map)
     {
-        $this->owner = new Owner($map);
+        $this->owner = new Owner($map['owner']);
     }
 }

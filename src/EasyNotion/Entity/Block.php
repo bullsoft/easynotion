@@ -1,7 +1,7 @@
 <?php
 namespace EasyNotion\Entity;
 
-class Block
+class Block extends AbstractObject
 {
     
 }

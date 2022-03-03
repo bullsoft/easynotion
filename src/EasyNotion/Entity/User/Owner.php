@@ -11,9 +11,8 @@ class Owner
 
     public function __construct(array $map)
     {
-        $item = $map['owner'];
-        $this->type = TypeOwner::from($item['type']);
-        $this->setValue($item);
+        $this->type = TypeOwner::from($map['type']);
+        $this->setValue($map);
     }
 
     public function setValue(array $map): static
