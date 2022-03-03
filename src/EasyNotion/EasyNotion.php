@@ -1,7 +1,7 @@
 <?php
 namespace EasyNotion;
 use GuzzleHttp\Client as HttpClient;
-use EasyNotion\Http\Database;
+use EasyNotion\Http\{Database, User};
 
 class EasyNotion
 {
@@ -16,7 +16,7 @@ class EasyNotion
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-                'Notion-Version' => '2021-08-16',
+                'Notion-Version' => '2022-02-22',
             ]
         ];
         $this->client = new HttpClient($config);
@@ -25,5 +25,10 @@ class EasyNotion
     public function database(?string $id = null)
     {
         return new Database($this->client, $id);
+    }
+
+    public function user(?string $id = null)
+    {
+        return new User($this->client, $id);
     }
 }
