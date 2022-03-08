@@ -10,9 +10,15 @@ class Database extends AbstractObject
 {
     public Type $object = Type::Database;
     public string $id;
-    public $created_by;
+    
+    public PartialUser $created_by;
+    // ISO8601 date and time
     public string $created_time;
+
+    public PartialUser $last_edited_by;
+    // ISO8601 date and time
     public string $last_edited_time;
+
     //#RichTextObject()
     public array $title;
     public null|FileObject|EmojiObject $icon;
@@ -29,15 +35,15 @@ class Database extends AbstractObject
              ->setLastEditedBy($map['last_edited_by'])
              ->setLastEditedTime($map['last_edited_time'])
              ->setTitle($map['title'])
-             ->setProperties($map['properties'])
              ->setParent($map['parent'])
+             ->setProperties($map['properties'])
              ->setUrl($map['url'])
              ;
     }
 
     public function setCreatedBy(array $val): static
     {
-        $this->created_by = new Reference(
+        $this->created_by = new PartialUser(
             Type::from($val['object']),
             $val['id']
         );
@@ -52,7 +58,7 @@ class Database extends AbstractObject
 
     public function setLastEditedBy(array $val): static 
     {
-        $this->last_edited_by = new Reference(
+        $this->last_edited_by = new PartialUser(
             Type::from($val['object']),
             $val['id']
         );

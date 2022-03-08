@@ -1,8 +1,8 @@
 <?php
 namespace EasyNotion\Property;
-use EasyNotion\Property\Database\Type;
+use EasyNotion\Property\Type;
 
-class Page
+class Page extends Database
 {
     
 }

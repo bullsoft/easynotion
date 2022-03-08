@@ -1,5 +1,5 @@
 <?php
-namespace EasyNotion\Property\Database;
+namespace EasyNotion\Property;
 
 enum Type: string
 {

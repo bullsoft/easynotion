@@ -6,4 +6,9 @@ class External
 {
     public string $type = Type::External;
     public string $url;
+
+    public function __construct(array $map)
+    {
+        $this->url = $map['url'];
+    }
 }

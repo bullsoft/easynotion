@@ -1,20 +1,27 @@
 <?php
 namespace EasyNotion\Entity;
 
-class Reference extends AbstractObject
+class Reference
 {
-    public Type $object;
-    public string $id;
+    public string $type;
+    private Type $_type;
+    public ?string $page_id;
+    public ?string $block_id;
+    public ?string $database_id;
+    public ?string $user_id;
 
-    public function __construct(Type $object, string $id)
+    public function __construct(array $map)
     {
-        $this->object = $object;
-        $this->id = $id;
+        $entityType = strstr($map['type'], '_id', true);
+        $this->_type = Type::from($entityType);
+        $this->type = $map['type'];
+        $this->{$this->type} = $map[$this->type];
     }
 
     public function resolve()
     {
-        return match($this->object) {
+        $val = $this->_type->value;
+        return match($this->_type) {
             Type::Page => '',
             Type::Database => '',
             Type::Block => '',

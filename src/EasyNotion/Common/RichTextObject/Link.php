@@ -11,7 +11,7 @@ class Link
     {
         $this->url = $url;
         if(is_array($caption)) {
-            $this->caption = new Collection($caption);
+            $this->caption = new Collection('rich_text', $caption);
         }
     }
 }

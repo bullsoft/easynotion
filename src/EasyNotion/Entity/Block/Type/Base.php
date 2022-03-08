@@ -6,7 +6,7 @@ use EasyNotion\Entity\Block\Collection;
 abstract class Base
 {
     public ?CommCollection $rich_text;
-    public ?Collection $children;
+    public null|Collection|array $children;
 
     public function __construct(array $map)
     {

@@ -1,6 +1,7 @@
 <?php
 namespace EasyNotion\Property;
-use EasyNotion\Property\Database\Type;
+use EasyNotion\Property\Type;
+use EasyNotion\Common\Collection;
 
 class Database
 {
@@ -8,9 +9,9 @@ class Database
     public Type $type;
     public string $name;
     // Type specific
-    public $title;
-    public $rich_text;
-    public $number;
+    public Collection $title;
+    public Collection $rich_text;
+    public int $number;
     public $select;
     public $multi_select;
     public $date;

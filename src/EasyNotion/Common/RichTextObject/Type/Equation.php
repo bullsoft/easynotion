@@ -3,5 +3,10 @@ namespace EasyNotion\Common\RichTextObject\Type;
 
 class Equation
 {
-    protected $equation;
+    public string $expression;
+
+    public function __construct(string $expression)
+    {
+        $this->expression = $expression;
+    }
 }
