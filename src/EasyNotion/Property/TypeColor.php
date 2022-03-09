@@ -1,7 +1,7 @@
 <?php
 namespace EasyNotion\Property;
 
-enum Color: string
+enum TypeColor: string
 {
     case Default = 'default';
     case Gray = 'gray';

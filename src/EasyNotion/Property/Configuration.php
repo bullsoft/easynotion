@@ -1,0 +1,57 @@
+<?php
+namespace EasyNotion\Property;
+use EasyNotion\Property\Type;
+use EasyNotion\Property\Configuration\{
+    Number, Select, MultiSelect, Formula,
+    Relation, Rollup,
+};
+
+class Configuration
+{
+    public string $id;
+    public Type $type;
+    public string $name;
+    // Type specific
+    public ?\stdClass $title;
+    public ?\stdClass $rich_text;
+    public ?Number $number;
+    public ?Select $select;
+    public ?MultiSelect $multi_select;
+    public ?\stdClass $date;
+    public ?\stdClass $people;
+    public ?\stdClass $files;
+    public ?\stdClass $checkbox;
+    public ?\stdClass $url;
+    public ?\stdClass $email;
+    public ?\stdClass $phone_number;
+    public ?Formula $formula;
+    public ?Relation $relation;
+    public ?Rollup $rollup;
+    public ?\stdClass $created_time;
+    public ?\stdClass $created_by;
+    public ?\stdClass $last_edited_time;
+    public ?\stdClass $last_edited_by;
+
+    public function __construct(array $map)
+    {
+        $this->id = $map['id'];
+        $this->name = $map['name'];
+        $this->type = Type::from($map['type']);
+        $this->setValue($map);
+    }
+
+    public function setValue(array $map): static
+    {
+        $val = $map[$this->type->value];
+        match($this->type) {
+            Type::Title => $this->title = new \stdClass(),
+            Type::MultiSelect => $this->multi_select = new MultiSelect($val),
+        };
+        return $this;
+    }
+
+    public function getValue()
+    {
+        
+    }
+}

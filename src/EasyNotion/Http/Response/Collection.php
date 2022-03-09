@@ -4,7 +4,7 @@ namespace EasyNotion\Http\Response;
 
 use EasyNotion\Entity\Factory;
 use EasyNotion\Entity\Type;
-use EasyNotion\Property\Page\Item as PropertyItem;
+use EasyNotion\Entity\PropertyItem;
 
 class Collection
 {

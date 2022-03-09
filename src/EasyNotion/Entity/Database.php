@@ -4,7 +4,7 @@ use EasyNotion\Common\RichTextObject;
 use EasyNotion\Common\FileObject;
 use EasyNotion\Common\EmojiObject;
 use EasyNotion\Entity\{Type, Reference};
-use EasyNotion\Property\Database as DatabaseProperty;
+use EasyNotion\Property\Configuration;
 
 class Database extends AbstractObject
 {
@@ -83,7 +83,7 @@ class Database extends AbstractObject
     public function setProperties(array $map): static
     {
         foreach($map as $key => $item) {
-            $this->properties[] = new DatabaseProperty($item);
+            $this->properties[$key] = new Configuration($item);
         }
         return $this;
     }

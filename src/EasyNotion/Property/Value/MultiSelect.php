@@ -1,5 +1,5 @@
 <?php
-namespace EasyNotion\Property\Type;
+namespace EasyNotion\Property\Value;
 
 class MultiSelect
 {

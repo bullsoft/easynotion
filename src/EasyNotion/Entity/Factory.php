@@ -13,7 +13,8 @@ class Factory
             'list' => new Collection($data),
             'user' => new User($data),
             'database' => new Database($data),
-            'page' => new Page($data)
+            'page' => new Page($data),
+            'property_item' => new PropertyItem($data),
         };
     }
 }

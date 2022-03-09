@@ -7,12 +7,14 @@ use EasyNotion\Common\FileObject\Type\File;
 class FileObject
 {
     public Type $type;
+    public ?string $name;
     public ?External $external;
     public ?File $file;
 
     public function __construct(array $map)
     {
         $this->type = Type::from($map['type']);
+        $this->name = $map['name'] ?? null;
         $this->setValue($map);
     }
 

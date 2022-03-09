@@ -1,11 +1,13 @@
 <?php
 
-namespace EasyNotion\Property\Type;
+namespace EasyNotion\Property\Value;
+use EasyNotion\Property\TypeFormula;
 
 class Formula
 {
-    public string $type;
+    public TypeFormula $type;
     
+    // type specific
     public ?string $string;
     public ?int $number;
     public ?bool $boolean;
