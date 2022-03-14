@@ -1,7 +1,7 @@
 <?php
 namespace EasyNotion;
 use GuzzleHttp\Client as HttpClient;
-use EasyNotion\Http\{Database, User};
+use EasyNotion\Http\{Database, User, Page};
 
 class EasyNotion
 {
@@ -25,6 +25,11 @@ class EasyNotion
     public function database(?string $id = null)
     {
         return new Database($this->client, $id);
+    }
+
+    public function page(?string $id = null)
+    {
+        return new Page($this->client, $id);
     }
 
     public function user(?string $id = null)

@@ -9,7 +9,7 @@ enum Type: string
 
     public function resolve(array $map) 
     {
-        return match($this->value) {
+        return match($this) {
             self::RichTextObject => new RichTextObject($map),
             self::FileObject => new FileObject($map),
             self::EmojiObject => new EmojiObject($map)

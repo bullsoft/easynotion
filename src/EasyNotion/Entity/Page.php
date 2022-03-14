@@ -3,10 +3,7 @@ namespace EasyNotion\Entity;
 use EasyNotion\Common\RichTextObject;
 use EasyNotion\Common\FileObject;
 use EasyNotion\Common\EmojiObject;
-use EasyNotion\Property\{
-    Database as DatabaseProperty,
-    Page as PageProperty,
-};
+use EasyNotion\Property\Value as PropertyValue;
 
 class Page extends AbstractObject
 {
@@ -76,7 +73,7 @@ class Page extends AbstractObject
     public function setProperties(array $map): static
     {
         foreach($map as $key => $item) {
-            $this->properties[] = new PageProperty($item);
+            $this->properties[$key] = new PropertyValue($item);
         }
         return $this;
     }

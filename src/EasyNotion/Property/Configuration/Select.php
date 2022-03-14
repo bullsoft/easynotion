@@ -9,6 +9,7 @@ class Select
 
     public function __construct(array $list)
     {
+        $list = $list['options'];
         foreach($list as $map) {
             $this->options[] = new SelectValue($map);
         }   

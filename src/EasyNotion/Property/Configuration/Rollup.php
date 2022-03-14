@@ -1,7 +1,7 @@
 <?php
 namespace EasyNotion\Property\Configuration;
 
-use EasyNotion\Property\Type\TypeFunction;
+use EasyNotion\Property\TypeFunction;
 
 class Rollup
 {

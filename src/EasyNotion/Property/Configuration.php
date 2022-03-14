@@ -45,7 +45,14 @@ class Configuration
         $val = $map[$this->type->value];
         match($this->type) {
             Type::Title => $this->title = new \stdClass(),
+            Type::RichText => $this->rich_text = new \stdClass(),
             Type::MultiSelect => $this->multi_select = new MultiSelect($val),
+            Type::Select => $this->select = new Select($val),
+            Type::Number => $this->number = new Number($val),
+            Type::Formula => $this->formula = new Formula($val),
+            Type::Relation => $this->relation = new Relation($val),
+            Type::Rollup => $this->rollup = new Rollup($val),
+            default => $this->{$this->type->value} = new \stdClass(),
         };
         return $this;
     }
@@ -53,5 +60,10 @@ class Configuration
     public function getValue()
     {
         
+    }
+
+    public function getType(): Type
+    {
+        return $this->type;
     }
 }
