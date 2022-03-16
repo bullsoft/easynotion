@@ -3,12 +3,12 @@ namespace EasyNotion\Property\Value;
 
 class MultiSelect
 {
-    public array $list;
+    public array $options;
 
     public function __construct(array $list)
     {
         foreach($list as $select) {
-            $this->list[] = new Select($select);
+            $this->options[] = new Select($select);
         }
     }
 }

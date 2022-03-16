@@ -4,8 +4,7 @@ namespace EasyNotion\Http;
 use Exception;
 use Psr\Http\Message\ResponseInterface;
 use EasyNotion\Http\Exception\Non200;
-use EasyNotion\Http\Response\Collection;
-use EasyNotion\Entity\Factory;
+use EasyNotion\Http\Factory;
 
 class Response
 {

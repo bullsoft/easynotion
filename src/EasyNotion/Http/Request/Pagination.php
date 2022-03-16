@@ -24,6 +24,7 @@ class Pagination implements \Stringable, \JsonSerializable
             "page_size" => $this->page_size,
         ];
     }
+    
     #[\ReturnTypeWillChange] 
     public function jsonSerialize() {
         return $this->__toArray();

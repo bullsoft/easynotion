@@ -2,7 +2,7 @@
 
 namespace EasyNotion\Http\Response;
 
-use EasyNotion\Entity\Factory;
+use EasyNotion\Http\Factory;
 use EasyNotion\Entity\Type;
 use EasyNotion\Entity\PropertyItem;
 

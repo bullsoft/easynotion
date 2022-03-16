@@ -29,8 +29,8 @@ enum Type: string
     case ColumnList = 'column_list';
     case LinkPreview = 'link_preview';
     case LinkToPage = 'link_to_page';
-    case Header1 = 'header_1';
-    case Header2 = 'header_2';
-    case Header3 = 'header_3';
+    case Header1 = 'heading_1';
+    case Header2 = 'heading_2';
+    case Header3 = 'heading_3';
     case Table = 'table';
 }

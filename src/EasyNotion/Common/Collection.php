@@ -1,17 +1,20 @@
 <?php
 namespace EasyNotion\Common;
-use EasyNotion\Common\Type;
-
+use EasyNotion\Common\TypeInterface;
 class Collection
 {
     public Type $type;
-    public array $list;
+    public array $results;
 
-    public function __construct(string $type, array $list)
+    public function __construct(string|TypeInterface $type, array $list)
     {
-        $this->type = Type::from($type);
+        if(is_string($type)) {
+            $this->type = Type::from($type);
+        } else {
+            $this->type = $type;
+        }
         foreach($list as $val) {
-            $this->list[] = $this->type->resolve($val);
+            $this->results[] = $this->type->resolve($val);
         }
     }
 }

@@ -1,20 +1,22 @@
 <?php
 namespace EasyNotion\Common;
-use EasyNotion\Common\FileObject\Type;
+use EasyNotion\Common\FileObject\Type as FileType;
 use EasyNotion\Common\FileObject\Type\External;
 use EasyNotion\Common\FileObject\Type\File;
 
 class FileObject
 {
-    public Type $type;
+    public FileType $type;
     public ?string $name;
+    public ?Collection $caption;
     public ?External $external;
     public ?File $file;
 
     public function __construct(array $map)
     {
-        $this->type = Type::from($map['type']);
+        $this->type = FileType::from($map['type']);
         $this->name = $map['name'] ?? null;
+        $this->caption = empty($map['caption']) ? null : new Collection(Type::RichTextObject, $map['caption']);
         $this->setValue($map);
     }
 
@@ -22,8 +24,8 @@ class FileObject
     {
         $val = $map[$this->type->value];
         match($this->type) {
-            Type::External => $this->external = new External($val),
-            Type::File => $this->file = new File($val),
+            FileType::External => $this->external = new External($val),
+            FileType::File => $this->file = new File($val),
         };
         return $this;
     }

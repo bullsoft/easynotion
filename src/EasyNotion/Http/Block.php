@@ -1,7 +1,7 @@
 <?php
 namespace EasyNotion\Http;
 use GuzzleHttp\Client as HttpClient;
-class Page
+class Block
 {
     public function __construct(
         private HttpClient $client,
@@ -16,18 +16,18 @@ class Page
         if(!$this->id) {
             throw new \ValueError("page id is not specified");
         }
-        $uri = "pages/{$this->id}";
+        $uri = "blocks/{$this->id}";
         $response = $this->client->get($uri);
         $res = new Response($response);
-        return $res->getValue();
+        return $res->getValue();   
     }
 
-    public function property(string $id) 
+    public function children()
     {
         if(!$this->id) {
             throw new \ValueError("page id is not specified");
         }
-        $uri = "pages/{$this->id}/properties/{$id}";
+        $uri = "blocks/{$this->id}/children";
         $response = $this->client->get($uri);
         $res = new Response($response);
         return $res->getValue();

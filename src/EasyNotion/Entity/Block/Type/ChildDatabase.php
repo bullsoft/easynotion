@@ -5,4 +5,9 @@ use EasyNotion\Common\Collection;
 class ChildDatabase
 {
     public string $title;
+    
+    public function __construct(array $map)
+    {
+        $this->title = $map['title'];
+    }
 }

@@ -17,9 +17,9 @@ class Database
         if(!$this->id) {
             throw new \ValueError("database id is not specified");
         }
-        $response = $this->client->get("databases/{$this->id}");
-        $body = $response->getBody();
-        $map = json_decode($body->getContents(), true);
-        return new DbEntity($map);
+        $uri = "databases/{$this->id}";
+        $response = $this->client->get($uri);
+        $res = new Response($response);
+        return $res->getValue();
     }
 }
