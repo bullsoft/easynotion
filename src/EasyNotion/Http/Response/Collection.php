@@ -34,4 +34,14 @@ class Collection
             $this->results[] = Factory::make($item);
         }
     }
+
+    public function hasMore(): bool
+    {
+        return $this->has_more === true;
+    }
+
+    public function next($client)
+    {
+        var_dump($client->client);
+    }
 }

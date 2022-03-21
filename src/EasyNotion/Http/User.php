@@ -5,27 +5,23 @@ use EasyNotion\Entity\User as UserEntity;
 class User
 {
     public function __construct(
-        private HttpClient $client,
-        private ?string $id
+        private HttpClient $client
     )
     {
         
     }
 
-    public function get()
+    public function get(string $id)
     {
-        if(!$this->id) {
-            throw new \ValueError("user id is not specified");
-        }
-        $response = $this->client->get("users/{$this->id}");
+        $response = $this->client->get("users/{$id}");
         $body = $response->getBody();
         $map = json_decode($body->getContents(), true);
         return new UserEntity($map);
     }
 
-    public function list()
+    public function list(int $step = 20, ?int $start = null)
     {
-        $page = new Request\Pagination(null, page_size: 16);
+        $page = new Request\Pagination($start, $step);
         $response = $this->client->get("users", [
             'query' => $page->__toArray()
         ]);

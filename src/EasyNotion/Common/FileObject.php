@@ -15,8 +15,11 @@ class FileObject
     public function __construct(array $map)
     {
         $this->type = FileType::from($map['type']);
-        $this->name = $map['name'] ?? null;
-        $this->caption = empty($map['caption']) ? null : new Collection(Type::RichTextObject, $map['caption']);
+        match(true) {
+            isset($map['name']) => $this->name = $map['name'],
+            isset($map['caption']) && !empty($map['caption']) => $this->caption = new Collection(Type::RichTextObject, $map['caption']),
+            default => 1 == 1,
+        };
         $this->setValue($map);
     }
 

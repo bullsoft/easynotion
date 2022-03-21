@@ -1,34 +1,31 @@
 <?php
 namespace EasyNotion\Http;
 use GuzzleHttp\Client as HttpClient;
+use EasyNotion\Entity\Block as EntityBlock;
 class Block
 {
     public function __construct(
-        private HttpClient $client,
-        private ?string $id
+        public readonly HttpClient $client,
     )
     {
         
     }
 
-    public function get()
+    public function get(string $id)
     {
-        if(!$this->id) {
-            throw new \ValueError("page id is not specified");
-        }
-        $uri = "blocks/{$this->id}";
+        $uri = "blocks/{$id}";
         $response = $this->client->get($uri);
         $res = new Response($response);
         return $res->getValue();   
     }
 
-    public function children()
+    public function children(EntityBlock $block, int $step = 20, ?int $start = null)
     {
-        if(!$this->id) {
-            throw new \ValueError("page id is not specified");
-        }
-        $uri = "blocks/{$this->id}/children";
-        $response = $this->client->get($uri);
+        $page = new Request\Pagination($start, $step);
+        $uri = "blocks/{$block->id}/children";
+        $response = $this->client->get($uri, [
+            'query' => $page->__toArray()
+        ]);
         $res = new Response($response);
         return $res->getValue();
     }
