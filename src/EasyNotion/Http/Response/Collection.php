@@ -5,6 +5,8 @@ namespace EasyNotion\Http\Response;
 use EasyNotion\Http\Factory;
 use EasyNotion\Entity\Type;
 use EasyNotion\Entity\PropertyItem;
+use EasyNotion\Http\Client;
+use EasyNotion\Http\Request\Pagination;
 
 class Collection
 {
@@ -15,7 +17,7 @@ class Collection
     public ?Type $type;
     public ?PropertyItem $property_item;
 
-    public function __construct(array $list)
+    public function __construct(array $list, public readonly Client $client)
     {
         if($list['object'] =! 'list') {
             throw new \ValueError("Collection accept only list");
@@ -31,7 +33,7 @@ class Collection
             $this->property_item = new PropertyItem($list['property_item']);
         }
         foreach($list['results'] as $item) {
-            $this->results[] = Factory::make($item);
+            $this->results[] = Factory::make($item, $this->client);
         }
     }
 
@@ -40,8 +42,23 @@ class Collection
         return $this->has_more === true;
     }
 
-    public function next($client)
+    public function nextCursor(): ?string
     {
-        var_dump($client->client);
+        return $this->next_cursor;
+    }
+
+    public function next()
+    {
+        if($this->hasMore()) {
+            $opts = $this->client->requestOpts();
+            if(isset($opts[1]['query'])) {
+                $page = Pagination::from($opts[1]['query']);
+            }
+            $page->start_cursor = $this->nextCursor();
+            $opts[1]['query'] = $page->__toArray();
+            $response = call_user_func_array([$this->client, $this->client->httpMethod()], $opts);
+            return $response->result();
+        }
+        return null;
     }
 }

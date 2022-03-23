@@ -45,10 +45,16 @@ trait BaseValue
 
     public function setValue(array $map): static
     {
-        $val = $map[$this->type->value];
+        $key = $this->type->value;
+        $val = $map[$key];
+        
+        if($val === null) {
+            $this->{$key} = null;
+            return $this;
+        }
         match($this->type) {
             Type::Title => $this->title = new Collection(CommType::RichTextObject, $val),
-            Type::RichText => $this->title = new Collection(CommType::RichTextObject, $val),
+            Type::RichText => $this->rich_text = new Collection(CommType::RichTextObject, $val),
             Type::Number => $this->number = $val,
             Type::Select => $this->select = new Select($val),
             Type::MultiSelect => $this->multi_select = new MultiSelect($val),

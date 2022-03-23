@@ -1,25 +1,24 @@
 <?php
 namespace EasyNotion\Http;
-use GuzzleHttp\Client as HttpClient;
 use EasyNotion\Entity\Database as DbEntity;
+
 class Database
 {
     public function __construct(
-        private HttpClient $client,
-        private ?string $id
+        private Client $client,
     )
     {
-        
     }
 
-    public function get()
+    public function get(string $id)
     {
-        if(!$this->id) {
-            throw new \ValueError("database id is not specified");
-        }
-        $uri = "databases/{$this->id}";
-        $response = $this->client->get($uri);
-        $res = new Response($response);
-        return $res->getValue();
+        $uri = "databases/{$id}";
+        return $this->client->get($uri)->result();
+    }
+
+    public function query(string $id)
+    {
+        $uri = "databases/{$id}/query";
+        return $this->client->post($uri)->result();
     }
 }

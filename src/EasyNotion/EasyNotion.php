@@ -1,12 +1,13 @@
 <?php
 namespace EasyNotion;
 use GuzzleHttp\Client as HttpClient;
+use EasyNotion\Http\Client;
 use EasyNotion\Http\{Database, User, Page, Block, Property};
 use EasyNotion\Entity\Page as EntityPage;
 
 class EasyNotion
 {
-    protected HttpClient $client;
+    protected Client $client;
 
     public function __construct(string $token, $apiVersion = 'v1')
     {
@@ -20,12 +21,12 @@ class EasyNotion
                 'Notion-Version' => '2022-02-22',
             ]
         ];
-        $this->client = new HttpClient($config);
+        $this->client = new Client(new HttpClient($config));
     }
 
-    public function database(?string $id = null)
+    public function database()
     {
-        return new Database($this->client, $id);
+        return new Database($this->client);
     }
 
     public function page()

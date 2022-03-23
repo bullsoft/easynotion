@@ -1,11 +1,11 @@
 <?php
 namespace EasyNotion\Http;
-use GuzzleHttp\Client as HttpClient;
 use EasyNotion\Entity\Block as EntityBlock;
+
 class Block
 {
     public function __construct(
-        public readonly HttpClient $client,
+        public readonly Client $client,
     )
     {
         
@@ -14,19 +14,15 @@ class Block
     public function get(string $id)
     {
         $uri = "blocks/{$id}";
-        $response = $this->client->get($uri);
-        $res = new Response($response);
-        return $res->getValue();   
+        return $this->client->get($uri)->result();
     }
 
-    public function children(EntityBlock $block, int $step = 20, ?int $start = null)
+    public function children(EntityBlock $block, int $pageSize = 20, ?string $start = null)
     {
-        $page = new Request\Pagination($start, $step);
+        $page = new Request\Pagination($start, $pageSize);
         $uri = "blocks/{$block->id}/children";
-        $response = $this->client->get($uri, [
+        return $this->client->get($uri, [
             'query' => $page->__toArray()
-        ]);
-        $res = new Response($response);
-        return $res->getValue();
+        ])->result();
     }
 }

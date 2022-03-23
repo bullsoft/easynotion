@@ -8,7 +8,7 @@ class Date
     public ?string $end;
     public ?string $time_zone;
 
-    public function __construct(array $map)
+    public function __construct(?array $map)
     {
         $this->start = $map['start'];
         $this->end = $map['end'] ?? null;
