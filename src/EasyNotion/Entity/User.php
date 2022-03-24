@@ -2,9 +2,11 @@
 namespace EasyNotion\Entity;
 
 use EasyNotion\Entity\Type;
+use EasyNotion\Common\UnionInterface;
 use EasyNotion\Entity\User\Type as UserType;
 use EasyNotion\Entity\User\Type\{Bot, Person};
-class User extends AbstractObject
+
+class User extends AbstractObject implements UnionInterface
 {
     public Type $object = Type::User;
     public string $id;
@@ -32,5 +34,11 @@ class User extends AbstractObject
             UserType::Bot => $this->bot = new Bot($val)
         };
         return $this;
+    }
+
+    public function getValue()
+    {
+        $key = $this->type->value;
+        return $this->{$key};
     }
 }

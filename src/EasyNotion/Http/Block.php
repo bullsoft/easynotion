@@ -17,10 +17,10 @@ class Block
         return $this->client->get($uri)->result();
     }
 
-    public function children(EntityBlock $block, int $pageSize = 20, ?string $start = null)
+    public function children(string $blockId, int $pageSize = 20, ?string $start = null)
     {
         $page = new Request\Pagination($start, $pageSize);
-        $uri = "blocks/{$block->id}/children";
+        $uri = "blocks/{$blockId}/children";
         return $this->client->get($uri, [
             'query' => $page->__toArray()
         ])->result();

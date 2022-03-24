@@ -8,7 +8,7 @@ use EasyNotion\Entity\{User, Database, Page, PropertyItem, Block};
 
 class Factory
 {
-    public static function make(array $data, ?Client $client)
+    public static function make(array $data, Client $client)
     {
         return match($data['object']) {
             'list' => new Collection($data, $client),

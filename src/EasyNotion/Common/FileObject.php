@@ -4,7 +4,7 @@ use EasyNotion\Common\FileObject\Type as FileType;
 use EasyNotion\Common\FileObject\Type\External;
 use EasyNotion\Common\FileObject\Type\File;
 
-class FileObject
+class FileObject implements UnionInterface
 {
     public FileType $type;
     public ?string $name;
@@ -31,5 +31,11 @@ class FileObject
             FileType::File => $this->file = new File($val),
         };
         return $this;
+    }
+
+    public function getValue()
+    {
+        $key = $this->type->value;
+        return $this->{$key};
     }
 }

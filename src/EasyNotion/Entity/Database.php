@@ -105,4 +105,9 @@ class Database extends AbstractObject
         $intance = new static($map);
         return $intance;
     }
+
+    public function getValue()
+    {
+        
+    }
 }

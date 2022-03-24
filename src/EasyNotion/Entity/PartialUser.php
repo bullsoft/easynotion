@@ -21,13 +21,8 @@ class PartialUser extends AbstractObject
         }
     }
 
-    public function resolve()
+    public function resolve(array $map)
     {
-        return match($this->object) {
-            Type::Page => '',
-            Type::Database => '',
-            Type::Block => '',
-            Type::User => ''
-        };
+        return new User($map);
     }
 }

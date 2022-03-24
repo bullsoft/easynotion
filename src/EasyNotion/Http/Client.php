@@ -13,12 +13,24 @@ class Client
     private string $body;
     private string $httpMethod;
     private array $headers;
+    public readonly HttpClient $client;
 
     public function __construct(
-        public readonly HttpClient $client,
+        public array $options,
         public array $requestOpts = [],
     )
     {
+        $config = [
+            'base_uri' => 'https://api.notion.com'."/{$options['apiVersion']}/",
+            'timeout'  => 3.0,
+            'headers' => [
+                'Authorization' => 'Bearer ' . $options['token'],
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'Notion-Version' => $options['version'],
+            ]
+        ];
+        $this->client = new HttpClient($config);
     }
 
     public function httpClient(): HttpClient
@@ -52,6 +64,7 @@ class Client
             $this->requestOpts = $args;
         }
         $this->httpMethod = $method;
+
         $response = call_user_func_array([$this->client, $method], $this->requestOpts);
 
         $code = $response->getStatusCode(); // 200
@@ -60,8 +73,8 @@ class Client
             throw new Non200("{$reason} {$code}");
         }
         $stream = $response->getBody(); // Body Stream
-        $this->body = $stream->getContents(); // Content
-        $this->headers = $response->getHeaders();
+        $this->body = $stream->getContents(); // Content String
+        $this->headers = $response->getHeaders(); // Headers Array
 
         return $this;
     }

@@ -52,6 +52,10 @@ class Block extends AbstractObject
     {
         $key = $this->type->value;
         $val = $map[$key];
+        if($val === null) {
+            $this->{$key} = null;
+            return $this;
+        }
         match($this->type) {
             BlockType::Paragraph => $this->paragraph = new Paragraph($val),
             BlockType::Image => $this->image = new FileObject($val),
@@ -60,5 +64,11 @@ class Block extends AbstractObject
             BlockType::Header1, BlockType::Header2, BlockType::Header3 => $this->{$key} = new Heading($val), 
         };
         return $this;
+    }
+
+    public function getValue()
+    {
+        $key = $this->type->value;
+        return $this->{$key};
     }
 }

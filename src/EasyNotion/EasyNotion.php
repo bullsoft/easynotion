@@ -1,6 +1,5 @@
 <?php
 namespace EasyNotion;
-use GuzzleHttp\Client as HttpClient;
 use EasyNotion\Http\Client;
 use EasyNotion\Http\{Database, User, Page, Block, Property};
 use EasyNotion\Entity\Page as EntityPage;
@@ -9,19 +8,14 @@ class EasyNotion
 {
     protected Client $client;
 
-    public function __construct(string $token, $apiVersion = 'v1')
+    public function __construct(string $token, string $version = '2022-02-22', string $apiVersion = 'v1')
     {
-        $config = [
-            'base_uri' => 'https://api.notion.com'."/{$apiVersion}/",
-            'timeout'  => 3.0,
-            'headers' => [
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-                'Notion-Version' => '2022-02-22',
-            ]
+        $options = [
+            'token' => $token,
+            'apiVersion' => $apiVersion,
+            'version' => $version,
         ];
-        $this->client = new Client(new HttpClient($config));
+        $this->client = new Client($options);
     }
 
     public function database()

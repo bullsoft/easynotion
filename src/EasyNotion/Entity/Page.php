@@ -17,7 +17,7 @@ class Page extends AbstractObject
     public PartialUser $last_edited_by;
     // ISO8601 date and time
     public string $last_edited_time;
-    //#RichTextObject()
+
     public bool $archived;
     public null|FileObject|EmojiObject $icon;
     public ?FileObject $cover;
@@ -94,5 +94,10 @@ class Page extends AbstractObject
     {
         $intance = new static($map);
         return $intance;
+    }
+
+    public function getValue()
+    {
+        
     }
 }
