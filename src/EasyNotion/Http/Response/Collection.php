@@ -17,7 +17,7 @@ class Collection
     public ?Type $type;
     public ?PropertyItem $property_item;
 
-    public function __construct(array $list, public readonly Client $client)
+    public function __construct(array $list, private readonly Client $client)
     {
         if($list['object'] =! 'list') {
             throw new \ValueError("Collection accept only list");
@@ -47,17 +47,30 @@ class Collection
         return $this->next_cursor;
     }
 
+    public function result(): array
+    {
+        return $this->results;
+    }
+
     public function next()
     {
         if($this->hasMore()) {
             $opts = $this->client->requestOpts();
+            $page = null;
             if(isset($opts[1]['query'])) {
                 $page = Pagination::from($opts[1]['query']);
+                $page->start_cursor = $this->nextCursor();
+                $opts[1]['query'] = $page->__toArray();
             }
-            $page->start_cursor = $this->nextCursor();
-            $opts[1]['query'] = $page->__toArray();
-            $response = call_user_func_array([$this->client, $this->client->httpMethod()], $opts);
-            return $response->result();
+            if(isset($opts[1]['body']) && $page === null) {
+                $body = json_decode($opts[1]['body'], true);
+                $page = Pagination::from($body);
+                $page->start_cursor = $this->nextCursor();
+                $body = array_merge($body, $page->__toArray());
+                $opts[1]['body'] = json_encode($body);
+            }
+            $client = call_user_func_array([$this->client, $this->client->httpMethod()], $opts);
+            return $client->result();
         }
         return null;
     }

@@ -16,7 +16,7 @@ class User
         return $this->client->get($uri)->result();
     }
 
-    public function list(int $pageSize = 20, ?int $start = null)
+    public function list(int $pageSize = 20, ?string $start = null)
     {
         $page = new Request\Pagination($start, $pageSize);
         return $this->client->get("users", [

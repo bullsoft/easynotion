@@ -6,7 +6,7 @@ class Pagination implements \Stringable, \JsonSerializable
 {
     public function __construct(
         public ?string $start_cursor,
-        public readonly ?int $page_size = 20
+        public readonly int $page_size = 20
     )
     {
         
@@ -19,15 +19,18 @@ class Pagination implements \Stringable, \JsonSerializable
 
     public static function from(array $map): self
     {
-        return new self($map['start_cursor'], $map['page_size']);
+        return new self($map['start_cursor'] ?? null, $map['page_size'] ?? 20);
     }
 
     public function __toArray(): array
     {
-        return [
-            "start_cursor" => $this->start_cursor,
+        $ret = [
             "page_size" => $this->page_size,
         ];
+        if($this->start_cursor !== null) {
+            $ret["start_cursor"] = $this->start_cursor;
+        }
+        return $ret;
     }
     
     #[\ReturnTypeWillChange] 

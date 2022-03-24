@@ -16,9 +16,12 @@ class Database
         return $this->client->get($uri)->result();
     }
 
-    public function query(string $id)
+    public function query(string $id, int $pageSize = 20, ?string $start = null)
     {
+        $page = new Request\Pagination($start, $pageSize);
         $uri = "databases/{$id}/query";
-        return $this->client->post($uri)->result();
+        return $this->client->post($uri, [
+            'body' => json_encode($page),
+        ])->result();
     }
 }
