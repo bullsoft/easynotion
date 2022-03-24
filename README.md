@@ -46,7 +46,7 @@ var_dump($page);
 ```php
 $blockClient = $notion->block();
 
-$blockId = 'a43f308305d949a697376d74d31ea106'; // page is a special block
+$blockId = 'your-block-id'; // page is a special block
 
 $block = $blockClient->get($blockId);
 var_dump($block); // block entity
@@ -57,7 +57,7 @@ var_dump($children->next()); // collection for next page
 
 ```
 
-## property
+## Property
 
 ```php
 $pageClient = $notion->page();
@@ -67,7 +67,7 @@ $page = $pageClient->get($pageId);
 var_dump($page);
 
 $propertyClient = $notion->property($page);
-$property = $propertyClient->get('HV%3F~'); // "HV%3F~" is a propertyId from $page->properties
+$property = $propertyClient->get('your-property-id'); // PropertyId from $page->properties
 var_dump($property);
 
 ```
