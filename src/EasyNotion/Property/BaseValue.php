@@ -64,4 +64,10 @@ trait BaseValue
         };
         return $this;
     }
+
+    public function getValue()
+    {
+        $key = $this->type->value;
+        return $this->{$key};
+    }
 }

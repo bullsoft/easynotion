@@ -12,6 +12,6 @@ class Select
         $list = $list['options'];
         foreach($list as $map) {
             $this->options[] = new SelectValue($map);
-        }   
+        }
     }
 }

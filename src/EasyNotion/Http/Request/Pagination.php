@@ -33,8 +33,8 @@ class Pagination implements \Stringable, \JsonSerializable
         return $ret;
     }
     
-    #[\ReturnTypeWillChange] 
-    public function jsonSerialize() 
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
     {
         return $this->__toArray();
     }

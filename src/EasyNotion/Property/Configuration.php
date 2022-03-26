@@ -5,8 +5,9 @@ use EasyNotion\Property\Configuration\{
     Number, Select, MultiSelect, Formula,
     Relation, Rollup,
 };
+use EasyNotion\Common\UnionInterface;
 
-class Configuration
+class Configuration implements UnionInterface
 {
     public string $id;
     public Type $type;
@@ -42,7 +43,12 @@ class Configuration
 
     public function setValue(array $map): static
     {
-        $val = $map[$this->type->value];
+        $key = $this->type->value;
+        $val = $map[$key];
+        if($val === null) {
+            $this->{$key} = new \stdClass();
+            return $this;
+        }
         match($this->type) {
             Type::Title => $this->title = new \stdClass(),
             Type::RichText => $this->rich_text = new \stdClass(),
@@ -59,11 +65,17 @@ class Configuration
 
     public function getValue()
     {
-        
+        $key = $this->type->value;
+        return $this->{$key};
     }
 
     public function getType(): Type
     {
         return $this->type;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }
