@@ -30,6 +30,42 @@ while($query->hasMore()) {
 } 
 ```
 
+### Database Filter
+```php
+use EasyNotion\Property\Filter;
+
+$dbClient = $notion->database();
+$dbId = 'your-db-id';
+$db = $dbClient->get($dbId);
+
+$propConfig = $db->properties; // $db is a db-entity from remote
+
+$filter1 = Filter::make("Age", $propConfig['Age']->getType()); // type Number
+$filter1->greaterThan(30);
+
+$filter2 = Filter::make("Name", $propConfig['Name']->getType()); // type Title
+$filter2->contains('Gu');
+
+$filter1->and($filter2); // Compound
+
+echo json_encode($filter1) . PHP_EOL;
+
+$query = $dbClient->query($dbId, filter: $filter1);
+
+var_export($query->result());
+```
+
+### Database Sorts
+```php
+use EasyNotion\Property\Sort;
+
+$sort = new Sort();
+$sort->by("created_time", Direction::Asc);
+$sort->by('Name', Direction::Desc);
+echo json_encode($sort) . PHP_EOL;
+
+```
+
 ## Page
 
 ```php

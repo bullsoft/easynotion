@@ -18,6 +18,6 @@ enum Type: string implements TypeInterface
 
     public function get()
     {
-
+        return $this->value;
     }
 }

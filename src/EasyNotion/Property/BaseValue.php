@@ -28,9 +28,9 @@ trait BaseValue
     public ?Formula $formula;
     public ?Relation $relation;
     public ?Rollup $rollup;
-    // array of User Entity
+    // @Collection<User>
     public ?Collection $people;
-    // array of FileObject
+    // @Collectioin<FileObject>
     public ?Collection $files;
 
     public ?bool $checkbox;

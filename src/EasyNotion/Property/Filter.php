@@ -51,7 +51,7 @@ class Filter implements \JsonSerializable
 
     public function and(Filter $item)
     {
-        switch(gettype($this->filter)) {
+        switch(get_class($this->filter)) {
             case Property::class:
             case Timestamp::class:
                 $compound = new Compound($this->filter, "and");
