@@ -8,9 +8,14 @@ class Compound implements \JsonSerializable
 
     private Compound|Property|Timestamp $first;
 
-    public function __construct(Compound|Property|Timestamp $first)
+    public function __construct(Compound|Property|Timestamp $first, ?string $operator = null)
     {
         $this->first = $first;
+        match($operator) {
+            'or' => $this->or = [],
+            'and' => $this->and = [],
+            default => null,
+        };
     }
 
     public function or($item)
@@ -18,6 +23,8 @@ class Compound implements \JsonSerializable
         if(!isset($this->and)) {
             if(!isset($this->or)) {
                 $this->or = [];
+            }
+            if(empty($this->or)) {
                 $this->or[] = $this->first;
             }
             $this->or[] = $item;
@@ -30,6 +37,8 @@ class Compound implements \JsonSerializable
         if(!isset($this->or)) {
             if(!isset($this->and)) {
                 $this->and = [];
+            }
+            if(empty($this->and)) {
                 $this->and[] = $this->first;
             }
             $this->and[] = $item;

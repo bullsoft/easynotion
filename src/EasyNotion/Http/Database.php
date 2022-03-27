@@ -16,12 +16,20 @@ class Database
         return $this->client->get($uri)->result();
     }
 
-    public function query(string $id, int $pageSize = 20, ?string $start = null)
+    public function query(string $id, $filter = null, array $sorts = [], int $pageSize = 20, ?string $start = null)
     {
         $page = new Request\Pagination($start, $pageSize);
+        $opts = $page->__toArray();
+        if($filter !== null) {
+            $opts['filter'] = $filter;
+        }
+        if(!empty($sorts)) {
+            $opts['sorts'] = $sorts;
+        }
         $uri = "databases/{$id}/query";
+        var_dump(json_encode($opts));
         return $this->client->post($uri, [
-            'body' => json_encode($page),
+            'body' => json_encode($opts),
         ])->result();
     }
 }

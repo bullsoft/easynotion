@@ -8,20 +8,12 @@ use EasyNotion\Property\Filter\Type\{
     Rollup, Select, Text,
 };
 
-// rich_text, phone_number, number, checkbox, select, 
-// multi-select, date, people, files, relation, and formula
-
 class Property implements \JsonSerializable
 {
     private AbstractType $object;
-    private Type $type;
 
-    public string $property;
-
-    public function __construct(Configuration $config)
+    public function __construct(public readonly string $property, private Type $type)
     {
-        $this->type = $config->getType();
-        $this->property = $config->getName();
         match($this->type) {
             Type::Title, Type::RichText, Type::Email, Type::Url 
                 => $this->object = new Text($this->type),
