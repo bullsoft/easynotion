@@ -1,10 +1,11 @@
 <?php
 namespace EasyNotion\Entity;
 
+use EasyNotion\Common\UnionInterface;
 use EasyNotion\Property\BaseValue;
 use EasyNotion\Property\Type as PropertyType;
 
-class PropertyItem extends AbstractObject
+class PropertyItem extends AbstractObject implements UnionInterface
 {
     use BaseValue;
     public Type $object = Type::PropertyItem;

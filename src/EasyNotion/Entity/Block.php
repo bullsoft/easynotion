@@ -1,7 +1,9 @@
 <?php
 namespace EasyNotion\Entity;
 
-use EasyNotion\Common\FileObject;
+use EasyNotion\Common\{
+    FileObject, UnionInterface
+};
 use EasyNotion\Entity\Block\Type as BlockType;
 use EasyNotion\Entity\Type;
 use EasyNotion\Entity\PartialUser;
@@ -10,7 +12,7 @@ use EasyNotion\Entity\Block\Type\{
     ChildPage,
     Paragraph, Heading,
 };
-class Block extends AbstractObject
+class Block extends AbstractObject implements UnionInterface
 {
     public Type $object = Type::Block;
     // UUIDv4
@@ -25,7 +27,6 @@ class Block extends AbstractObject
 
 
     // type specified
-
     public ?Paragraph $paragraph;
     public ?Heading $header_1;
     public ?Heading $header_2;

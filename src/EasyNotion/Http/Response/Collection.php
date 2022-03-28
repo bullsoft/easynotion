@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyNotion\Http\Response;
 
 use EasyNotion\Http\Factory;
@@ -17,7 +16,7 @@ class Collection
     public ?Type $type;
     public ?PropertyItem $property_item;
 
-    public function __construct(array $list, private readonly Client $client)
+    public function __construct(array $list, public readonly Client $client)
     {
         if($list['object'] =! 'list') {
             throw new \ValueError("Collection accept only list");

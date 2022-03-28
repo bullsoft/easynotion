@@ -4,10 +4,9 @@ use EasyNotion\Entity\User as UserEntity;
 class User
 {
     public function __construct(
-        private Client $client
+        public readonly Client $client
     )
     {
-        
     }
 
     public function get(string $id)

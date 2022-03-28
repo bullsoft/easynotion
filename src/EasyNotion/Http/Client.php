@@ -83,9 +83,7 @@ class Client
     {
         $flag = false;
         if(!isset($this->headers['Content-Type'])) {
-            if($flag === false) {
-                throw new \ValueError("MIME: empty Content-Type");
-            }
+            throw new \ValueError("MIME: empty Content-Type");
         }
         foreach($this->headers['Content-Type'] as $header) {
             if(str_contains($header, 'application/json')) {

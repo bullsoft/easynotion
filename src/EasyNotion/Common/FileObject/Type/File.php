@@ -5,11 +5,13 @@ class File
 {
     public Type $type = Type::File;
     public string $url;
-    public string $expiry_time;
+    public ?string $expiry_time;
 
     public function __construct(array $map)
     {
         $this->url = $map['url'] ?? null;
-        $this->expiry_time = $map['expiry_time'] ?? null;
+        if(isset($map['expiry_time'])) {
+            $this->expiry_time = $map['expiry_time'];
+        }
     }
 }

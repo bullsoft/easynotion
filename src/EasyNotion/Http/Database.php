@@ -8,7 +8,7 @@ use EasyNotion\Property\{
 class Database
 {
     public function __construct(
-        private Client $client,
+        public readonly Client $client,
     )
     {
     }
@@ -30,7 +30,6 @@ class Database
             $opts += $sort->__toArray();
         }
         $uri = "databases/{$id}/query";
-        var_dump(json_encode($opts));
         return $this->client->post($uri, [
             'body' => json_encode($opts),
         ])->result();

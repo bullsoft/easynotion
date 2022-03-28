@@ -6,11 +6,10 @@ use EasyNotion\Entity\Page;
 class Property
 {
     public function __construct(
-        private Client $client,
+        public readonly Client $client,
         private Page $page,
     )
     {
-    
     }
 
     public function get(string $id)
