@@ -5,6 +5,7 @@ use EasyNotion\Property\Configuration\{
     Number, Select, MultiSelect, Formula,
     Relation, Rollup,
 };
+use EasyNotion\Property\Sort\Direction;
 use EasyNotion\Common\UnionInterface;
 
 class Configuration implements UnionInterface
@@ -12,6 +13,7 @@ class Configuration implements UnionInterface
     public string $id;
     public Type $type;
     public string $name;
+
     // Type specific
     public ?\stdClass $title;
     public ?\stdClass $rich_text;
@@ -77,5 +79,28 @@ class Configuration implements UnionInterface
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function filter()
+    {
+        return Filter::make($this->name, $this->type);
+    }
+
+    public function sortAsc()
+    {
+        $sort = new Sort();
+        return match($this->type) {
+            Type::CreatedTime, Type::LastEditedTime => $sort->by($this->type->value, Direction::Asc),
+            default => $sort->by($this->name, Direction::Asc),
+        };
+    }
+
+    public function sortDesc()
+    {
+        $sort = new Sort();
+        return match($this->type) {
+            Type::CreatedTime, Type::LastEditedTime => $sort->by($this->type->value, Direction::Desc),
+            default => $sort->by($this->name, Direction::Desc),
+        };
     }
 }

@@ -23,6 +23,17 @@ class Sort implements \JsonSerializable
         return $this;
     }
 
+    public function merge(Sort $item)
+    {
+        $this->sorts = array_merge($this->sorts, $item->get());
+        return $this;
+    }
+
+    public function get(): array
+    {
+        return $this->sorts;
+    }
+
     public function __toArray()
     {
         return ['sorts' => $this->sorts];

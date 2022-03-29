@@ -72,6 +72,7 @@ class Database extends AbstractObject
         return $this;
     }
 
+    // @TODO: Collection<RichTextObject>
     public function setTitle(array $list): static
     {
         foreach($list as $item) {
