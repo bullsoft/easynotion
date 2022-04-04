@@ -2,7 +2,7 @@
 namespace EasyNotion\Entity;
 
 use EasyNotion\Common\{
-    FileObject, UnionInterface
+    FileObject, UnionInterface, UUIDv4
 };
 use EasyNotion\Entity\Block\Type as BlockType;
 use EasyNotion\Entity\Type;
@@ -16,7 +16,7 @@ class Block extends AbstractObject implements UnionInterface
 {
     public Type $object = Type::Block;
     // UUIDv4
-    public string $id;
+    public UUIDv4 $id;
     public BlockType $type;
     public string $created_time;
     public PartialUser $created_by;
@@ -25,12 +25,11 @@ class Block extends AbstractObject implements UnionInterface
     public bool $archived;
     public bool $has_children;
 
-
     // type specified
-    public ?Paragraph $paragraph;
-    public ?Heading $header_1;
-    public ?Heading $header_2;
-    public ?Heading $header_3;
+    public ?Paragraph  $paragraph;
+    public ?Heading    $header_1;
+    public ?Heading    $header_2;
+    public ?Heading    $header_3;
     public ?FileObject $image;
 
     public ?ChildPage $child_page;
@@ -38,7 +37,7 @@ class Block extends AbstractObject implements UnionInterface
 
     public function __construct(array $map)
     {
-        $this->id = $map['id'];
+        $this->id = new UUIDv4($map['id']);
         $this->type = BlockType::from($map['type']);
         $this->created_time = $map['created_time'];
         $this->created_by = new PartialUser($map['created_by']);

@@ -1,9 +1,9 @@
 <?php
 namespace EasyNotion\Common;
 
-class UUIDv4 implements \Stringable
+class UUIDv4 implements \Stringable, \JsonSerializable
 {
-    public string $value;
+    public readonly string $value;
 
     public function __construct(string $val)
     {
@@ -19,6 +19,16 @@ class UUIDv4 implements \Stringable
     {
         $object = new self($val);
         return $object;
+    }
+
+    public function get(): string
+    {
+        return $this->value;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return $this->value;
     }
 
     public function __toString(): string

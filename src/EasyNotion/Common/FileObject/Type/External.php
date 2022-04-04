@@ -4,7 +4,7 @@ use EasyNotion\Common\FileObject\Type;
 
 class External
 {
-    public string $type = Type::External;
+    public Type $type = Type::External;
     public string $url;
 
     public function __construct(array $map)

@@ -10,7 +10,7 @@ class Link
     public function __construct(string $url, ?array $caption = null)
     {
         $this->url = $url;
-        if(is_array($caption)) {
+        if(is_array($caption) && !empty($caption)) {
             $this->caption = new Collection('rich_text', $caption);
         }
     }

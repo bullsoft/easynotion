@@ -8,11 +8,6 @@ class Sort implements \JsonSerializable
 {
     public array $sorts = [];
 
-    public function __construct()
-    {
-
-    }
-
     public function by(string $property, Direction $direction)
     {
         $item = match($property) {

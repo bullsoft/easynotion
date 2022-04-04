@@ -3,13 +3,16 @@ namespace EasyNotion\Entity;
 use EasyNotion\Common\RichTextObject;
 use EasyNotion\Common\FileObject;
 use EasyNotion\Common\EmojiObject;
+use EasyNotion\Common\{UUIDv4, Collection};
 use EasyNotion\Entity\{Type, Reference};
 use EasyNotion\Property\Configuration;
 
 class Database extends AbstractObject
 {
     public Type $object = Type::Database;
-    public string $id;
+
+    // UUIDv4
+    public UUIDv4 $id;
     
     public PartialUser $created_by;
     // ISO8601 date and time
@@ -19,8 +22,8 @@ class Database extends AbstractObject
     // ISO8601 date and time
     public string $last_edited_time;
 
-    //#RichTextObject()
-    public array $title;
+    // Collection<RichTextObject>
+    public Collection $title;
     public null|FileObject|EmojiObject $icon;
     public ?FileObject $cover;
     public array $properties;
@@ -29,7 +32,7 @@ class Database extends AbstractObject
 
     public function __construct(array $map)
     {
-        $this->id = $map['id'];
+        $this->id = new UUIDv4($map['id']);
         $this->setCreatedBy($map['created_by'])
              ->setCreatedTime($map['created_time'])
              ->setLastEditedBy($map['last_edited_by'])
@@ -72,12 +75,9 @@ class Database extends AbstractObject
         return $this;
     }
 
-    // @TODO: Collection<RichTextObject>
     public function setTitle(array $list): static
     {
-        foreach($list as $item) {
-            $this->title[] = new RichTextObject($item);
-        }
+        $this->title = new Collection('rich_text', $list);
         return $this;
     }
 
@@ -107,7 +107,7 @@ class Database extends AbstractObject
         return $intance;
     }
 
-    public function getValue()
+    public function get()
     {
         
     }

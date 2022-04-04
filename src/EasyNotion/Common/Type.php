@@ -11,12 +11,12 @@ enum Type: string implements TypeInterface
     {
         return match($this) {
             self::RichTextObject => new RichTextObject($map),
-            self::FileObject => new FileObject($map),
-            self::EmojiObject => new EmojiObject($map)
+            self::FileObject     => new FileObject($map),
+            self::EmojiObject    => new EmojiObject($map)
         };
     }
 
-    public function get()
+    public function get(): string
     {
         return $this->value;
     }

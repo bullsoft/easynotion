@@ -1,7 +1,8 @@
 <?php
 namespace EasyNotion\Common\RichTextObject\Type;
+use EasyNotion\Common\UnionInterface;
 
-class Mention
+class Mention implements UnionInterface
 {
     protected TypeMention $type;
     
@@ -15,5 +16,15 @@ class Mention
     public function __construct(array $map)
     {
         $this->type = TypeMention::from($map['type']);
+    }
+
+    public function setValue(array $map): static
+    {
+        return $this;
+    }
+
+    public function getValue()
+    {
+        return ;
     }
 }

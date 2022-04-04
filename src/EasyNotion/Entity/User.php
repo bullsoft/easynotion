@@ -3,13 +3,14 @@ namespace EasyNotion\Entity;
 
 use EasyNotion\Entity\Type;
 use EasyNotion\Common\UnionInterface;
+use EasyNotion\Common\UUIDv4;
 use EasyNotion\Entity\User\Type as UserType;
 use EasyNotion\Entity\User\Type\{Bot, Person};
 
 class User extends AbstractObject implements UnionInterface
 {
     public Type $object = Type::User;
-    public string $id;
+    public UUIDv4 $id;
     public ?UserType $type;
     public ?string $name;
     public ?string $avatar_url;
@@ -19,7 +20,7 @@ class User extends AbstractObject implements UnionInterface
 
     public function __construct(array $map)
     {
-        $this->id = $map['id'];
+        $this->id = new UUIDv4($map['id']);
         $this->type = UserType::from($map['type']);
         $this->name = $map['name'];
         $this->avatar_url = $map['avatar_url'];

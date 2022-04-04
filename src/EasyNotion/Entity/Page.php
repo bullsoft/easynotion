@@ -3,13 +3,14 @@ namespace EasyNotion\Entity;
 use EasyNotion\Common\RichTextObject;
 use EasyNotion\Common\FileObject;
 use EasyNotion\Common\EmojiObject;
+use EasyNotion\Common\UUIDv4;
 use EasyNotion\Property\Value as PropertyValue;
 
 class Page extends AbstractObject
 {
     public Type $object = Type::Page;
     // UUIDv4
-    public string $id;
+    public UUIDv4 $id;
     public PartialUser $created_by;
     // ISO8601 date and time
     public string $created_time;
@@ -27,7 +28,7 @@ class Page extends AbstractObject
 
     public function __construct(array $map)
     {
-        $this->id = $map['id'];
+        $this->id = new UUIDv4($map['id']);
         $this->archived = $map['archived'];
         $this->setCreatedBy($map['created_by'])
              ->setCreatedTime($map['created_time'])
@@ -96,7 +97,7 @@ class Page extends AbstractObject
         return $intance;
     }
 
-    public function getValue()
+    public function get()
     {
         
     }
