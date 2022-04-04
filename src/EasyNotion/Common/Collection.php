@@ -7,8 +7,9 @@ use EasyNotion\Common\TypeInterface;
  */
 class Collection implements \JsonSerializable, \Countable, \IteratorAggregate
 {
+    use CollectionTrait;
+
     public Type $type;
-    public array $results;
 
     public function __construct(string|TypeInterface $type, array $list)
     {
@@ -20,35 +21,5 @@ class Collection implements \JsonSerializable, \Countable, \IteratorAggregate
         foreach($list as $val) {
             $this->results[] = $this->type->resolve($val);
         }
-    }
-
-    public function isEmpty(): bool
-    {
-        return empty($this->results);
-    }
-
-    public function count(): int
-    {
-        return count($this->results);
-    }
-
-    public function jsonSerialize(): mixed
-    {
-        return $this->toArray();
-    }
-
-    public function __toArray(): array
-    {
-        return $this->results;
-    }
-
-    public function getIterator(): \Traversable
-    {
-        return new \ArrayIterator($this->results);
-    }
-
-    public function toArray(): array
-    {
-        return $this->__toArray();
     }
 }

@@ -1,14 +1,14 @@
 <?php
 namespace EasyNotion\Entity\Block;
-
-class Collection
+use EasyNotion\Common\CollectionTrait;
+class Collection implements \JsonSerializable, \Countable, \IteratorAggregate
 {
-    public array $list;
+    use CollectionTrait;
 
-    public function __construct(array $list)
+    public function __construct(array $results)
     {
-        foreach($list as $val) {
-            $this->list[] = Element::create($val);
+        foreach($results as $val) {
+            $this->results[] = Element::create($val);
         }
     }
 }
