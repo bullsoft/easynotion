@@ -1,7 +1,6 @@
 <?php
 namespace EasyNotion\Property\Filter\Operator;
 
-
 trait GreaterOrLess 
 {
     public function greaterThan(mixed $val)

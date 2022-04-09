@@ -1,7 +1,6 @@
 <?php
 namespace EasyNotion\Property\Filter\Operator;
 
-
 trait StartsOrEndsWith 
 {
     public function startsWith(mixed $val)

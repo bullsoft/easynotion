@@ -1,7 +1,6 @@
 <?php
 namespace EasyNotion\Property\Filter\Operator;
 
-
 trait EqualsOrNot 
 {
     public function equals(mixed $val)

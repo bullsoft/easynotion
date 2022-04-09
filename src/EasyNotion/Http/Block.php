@@ -7,7 +7,7 @@ class Block
     public function __construct(
         public readonly Client $client,
     )
-    { 
+    {
     }
 
     public function get(string $id)

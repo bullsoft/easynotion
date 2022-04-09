@@ -1,7 +1,6 @@
 <?php
 namespace EasyNotion\Property\Filter\Operator;
 
-
 trait EmptyorNot 
 {
     public function isEmpty()
