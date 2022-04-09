@@ -22,4 +22,10 @@ class User
             'query' => $page->__toArray()
         ])->result();
     }
+
+    public function bot()
+    {
+        $uri = "users/me";
+        return $this->client->get($uri)->result();
+    }
 }
