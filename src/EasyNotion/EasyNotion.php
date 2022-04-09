@@ -6,7 +6,7 @@ use EasyNotion\Entity\Page as EntityPage;
 
 class EasyNotion
 {
-    protected Client $client;
+    protected readonly Client $client;
 
     public function __construct(string $token, string $version = '2022-02-22', string $apiVersion = 'v1')
     {
