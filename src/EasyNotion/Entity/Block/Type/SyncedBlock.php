@@ -1,6 +1,6 @@
 <?php
 namespace EasyNotion\Entity\Block\Type;
-use EasyNotion\Entity\Block\Reference;
+use EasyNotion\Entity\Reference;
 
 
 class SyncedBlock extends Base
