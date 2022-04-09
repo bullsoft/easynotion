@@ -10,7 +10,7 @@ use EasyNotion\Entity\Block\Type as BlockType;
 use EasyNotion\Entity\Type;
 use EasyNotion\Entity\Block\Type\{
     BulletedListItem, ChildDatabase, ChildPage,
-    Column, ColumnList, Paragraph, Heading,
+    Code, Column, ColumnList, Paragraph, Heading,
     NumberedListItem, SyncedBlock, Table,
     Template, ToDo, Toggle,
 };
@@ -36,6 +36,7 @@ class Block extends AbstractObject implements UnionInterface
     public ?NumberedListItem $numbered_list_item;
     public ?ToDo $to_do;
     public ?Toggle $toggle;
+    public ?Code $code;
     public ?ChildPage $child_page;
     public ?ChildDatabase $child_database;
     public ?Link $embed;
@@ -80,10 +81,24 @@ class Block extends AbstractObject implements UnionInterface
         }
         match($this->type) {
             BlockType::Paragraph => $this->paragraph = new Paragraph($val),
-            BlockType::Image => $this->image = new FileObject($val),
+            BlockType::Header1, BlockType::Header2, BlockType::Header3 => $this->{$key} = new Heading($val), 
+            BlockType::BulletedListItem => $this->bulleted_list_item = new BulletedListItem($val),
+            BlockType::NumberedListItem => $this->numbered_list_item = new NumberedListItem($val),
+            BlockType::ToDo => $this->to_do = new ToDo($val),
+            BlockType::Toggle => $this->toggle = new Toggle($val),
+            BlockType::Code => $this->code = new Code($val),
             BlockType::ChildPage => $this->child_page = new ChildPage($val),
             BlockType::ChildDatabase => $this->child_database = new ChildDatabase($val),
-            BlockType::Header1, BlockType::Header2, BlockType::Header3 => $this->{$key} = new Heading($val), 
+            BlockType::Embed, BlockType::Bookmark, BlockType::LinkPreview => $this->{$key} = new Link($val['url']),
+            BlockType::Image, BlockType::Video, BlockType::File, BlockType::Pdf => $this->{$key} = new FileObject($val),
+            BlockType::Equation => $this->equation = new Equation($val['expression']),
+            BlockType::Divider, BlockType::Breadcrumb => $this->{$key} = new \stdClass(),
+            BlockType::Column => $this->column = new Column($val),
+            BlockType::ColumnList => $this->column_list = new ColumnList($val),
+            BlockType::Template => $this->template = new Template($val),
+            BlockType::LinkToPage => $this->link_to_page = new Reference($val),
+            BlockType::SyncedBlock => $this->synced_block = new SyncedBlock($val),
+            BlockType::Table => $this->table = new Table($val),
         };
         return $this;
     }
