@@ -7,7 +7,7 @@ trait CollectionTrait
 
     public function results(): array
     {
-        return $this->results;
+        return $this->results ?? [];
     }
     
     public function isEmpty(): bool

@@ -8,6 +8,11 @@ abstract class AbstractObject
     protected Type $object;
     protected readonly UUIDv4|string $id;
 
+    public function type(): Type
+    {
+        return $this->object;
+    }
+
     public function object(): Type
     {
         return $this->object;
