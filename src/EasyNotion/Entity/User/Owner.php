@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyNotion\Entity\User;
 use EasyNotion\Entity\User;
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyNotion\Entity;
 
 use EasyNotion\Common\TypeInterface;

@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyNotion\Http;
 
 use EasyNotion\Http\Response\Collection;

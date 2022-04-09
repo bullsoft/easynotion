@@ -12,16 +12,17 @@ class Collection implements \JsonSerializable, \Countable, \IteratorAggregate
 {
     use CollectionTrait;
 
+    const OBJECT = 'list';
     public bool $has_more;
     public ?string $next_cursor;
-    public string $object = 'list';
+    public string $object = self::OBJECT;
     public ?Type $type;
     public ?PropertyItem $property_item;
 
     public function __construct(array $list, public readonly Client $client)
     {
-        if($list['object'] =! 'list') {
-            throw new \ValueError("Collection accept only list");
+        if($list['object'] !== self::OBJECT) {
+            throw new \ValueError("Notion http collection accept only list object");
         }
         $this->has_more = $list['has_more'];
         if($this->has_more === true) {

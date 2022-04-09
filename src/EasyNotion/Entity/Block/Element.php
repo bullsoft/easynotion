@@ -32,7 +32,7 @@ class Element
     public ?Link $embed;
     public ?FileObject $image;
     public ?FileObject $video;
-    public ?FileObject $file; // caption - array of rich text object
+    public ?FileObject $file; // key: caption - array of rich text object
     public ?FileObject $pdf;
     public ?Link $bookmark;
     public ?Equation $equation;

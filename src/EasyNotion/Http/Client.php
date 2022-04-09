@@ -1,12 +1,8 @@
 <?php
 namespace EasyNotion\Http;
-
-use Exception;
-use Psr\Http\Message\ResponseInterface;
 use EasyNotion\Http\Exception\Non200;
 use EasyNotion\Http\Factory;
 use GuzzleHttp\Client as HttpClient;
-use EasyNotion\Http\Request\Pagination;
 
 class Client
 {

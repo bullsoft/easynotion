@@ -1,8 +1,6 @@
 <?php
-
 namespace EasyNotion\Property\Configuration;
-
-use EasyNotion\Property\Type\TypeFormat;
+use EasyNotion\Property\TypeFormat;
 
 class Number
 {

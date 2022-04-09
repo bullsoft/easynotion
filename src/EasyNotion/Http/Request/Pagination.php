@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyNotion\Http\Request;
 
 class Pagination implements \Stringable, \JsonSerializable
@@ -9,7 +8,6 @@ class Pagination implements \Stringable, \JsonSerializable
         public readonly int $page_size = 20
     )
     {
-        
     }
 
     public function __toString(): string
@@ -17,16 +15,14 @@ class Pagination implements \Stringable, \JsonSerializable
         return http_build_query($this->__toArray());
     }
 
-    public static function from(array $map): self
+    public static function from(array $map): static
     {
         return new self($map['start_cursor'] ?? null, $map['page_size'] ?? 20);
     }
 
     public function __toArray(): array
     {
-        $ret = [
-            "page_size" => $this->page_size,
-        ];
+        $ret = ["page_size" => $this->page_size];
         if($this->start_cursor !== null) {
             $ret["start_cursor"] = $this->start_cursor;
         }

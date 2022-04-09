@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyNotion\Entity\User\Type;
 
 class Person
