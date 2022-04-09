@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyNotion\Property\Value;
 
 class Date

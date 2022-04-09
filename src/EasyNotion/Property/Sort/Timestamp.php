@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyNotion\Property\Sort;
 
 class Timestamp implements \JsonSerializable

@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyNotion\Property;
 
 use EasyNotion\Entity\{
@@ -38,9 +37,9 @@ trait BaseValue
     public ?string $email;
     public ?string $phone_number;
 
-    public ?string $created_time;
+    public ?\DateTime $created_time;
     public ?User $created_by;
-    public ?string $last_edited_time;
+    public ?\DateTime $last_edited_time;
     public ?User $last_edited_by;
 
     public function setValue(array $map): static
@@ -61,6 +60,9 @@ trait BaseValue
             Type::Date => $this->date = new Date($val),
             Type::People => $this->people = new Collection(EntityType::User, $val),
             Type::Files => $this->files = new Collection(CommType::FileObject, $val),
+            Type::Checkbox, Type::Url, Type::Email, Type::PhoneNumber => $this->{$key} = $val,
+            Type::CreatedBy, Type::LastEditedBy => $this->{$key} = new User($val),
+            Type::CreatedTime, Type::LastEditedTime => $this->{$key} = new \DateTime($val)
         };
         return $this;
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyNotion\Property\Value;
 use EasyNotion\Property\TypeFormula;
 

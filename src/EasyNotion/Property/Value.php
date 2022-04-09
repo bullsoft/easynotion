@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyNotion\Property;
 use EasyNotion\Common\UnionInterface;
 
