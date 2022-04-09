@@ -1,4 +1,5 @@
 # easynotion
+
 Notion SDK for PHP
 
 ```php
@@ -21,16 +22,17 @@ var_dump($db); // db entity
 
 // db content
 $query = $dbClient->query($dbId, 1);
-var_dump($query->result());
+var_dump($query->results());
 
 while($query->hasMore()) {
     sleep(2);
     $query = $query->next();
-    var_dump($query->result());
+    var_dump($query->results());
 } 
 ```
 
 ### Database Filter
+
 ```php
 use EasyNotion\Property\Filter;
 
@@ -52,10 +54,11 @@ echo json_encode($filter1) . PHP_EOL;
 
 $query = $dbClient->query($dbId, filter: $filter1);
 
-var_export($query->result());
+var_export($query->results());
 ```
 
 ### Database Sorts
+
 ```php
 use EasyNotion\Property\Sort;
 
