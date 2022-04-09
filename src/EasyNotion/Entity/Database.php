@@ -9,18 +9,12 @@ use EasyNotion\Property\Configuration;
 
 class Database extends AbstractObject
 {
-    public Type $object = Type::Database;
+    use MetaTrait;
 
+    // Entity Type
+    protected Type $object = Type::Database;
     // UUIDv4
-    public UUIDv4 $id;
-    
-    public PartialUser $created_by;
-    // ISO8601 date and time
-    public string $created_time;
-
-    public PartialUser $last_edited_by;
-    // ISO8601 date and time
-    public string $last_edited_time;
+    protected readonly UUIDv4|string $id;
 
     // Collection<RichTextObject>
     public Collection $title;
@@ -28,7 +22,7 @@ class Database extends AbstractObject
     public ?FileObject $cover;
     public array $properties;
     public ParentObject $parent;
-    public $url;
+    public string $url;
 
     public function __construct(array $map)
     {
@@ -42,37 +36,6 @@ class Database extends AbstractObject
              ->setProperties($map['properties'])
              ->setUrl($map['url'])
              ;
-    }
-
-    public function setCreatedBy(array $val): static
-    {
-        $this->created_by = new PartialUser(
-            Type::from($val['object']),
-            $val['id']
-        );
-        return $this;
-    }
-
-    public function setCreatedTime(string $val): static
-    {
-        $this->created_time = $val;
-        return $this;
-    }
-
-    public function setLastEditedBy(array $val): static 
-    {
-        $this->last_edited_by = new PartialUser(
-            Type::from($val['object']),
-            $val['id']
-        );
-        return $this;
-        return $this;
-    }
-
-    public function setLastEditedTime(string $val): static
-    {
-        $this->last_edited_time = $val;
-        return $this;
     }
 
     public function setTitle(array $list): static

@@ -4,8 +4,10 @@ use EasyNotion\Common\UUIDv4;
 
 class PartialUser extends AbstractObject
 {
-    public Type $object;
-    public UUIDv4 $id;
+    // Entity Type
+    protected Type $object;
+    // UUIDv4
+    protected readonly UUIDv4|string $id;
 
     public function __construct(string|array|Type $object, ?string $id = null)
     {

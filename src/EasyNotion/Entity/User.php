@@ -9,11 +9,15 @@ use EasyNotion\Entity\User\Type\{Bot, Person};
 
 class User extends AbstractObject implements UnionInterface
 {
-    public Type $object = Type::User;
-    public UUIDv4 $id;
+    // Entity Type
+    protected Type $object = Type::User;
+    // UUIDv4
+    protected readonly UUIDv4|string $id;
+
     public ?UserType $type;
     public ?string $name;
     public ?string $avatar_url;
+
     // type specificed
     public ?Person $person;
     public ?Bot $bot;
@@ -23,7 +27,9 @@ class User extends AbstractObject implements UnionInterface
         $this->id = new UUIDv4($map['id']);
         $this->type = UserType::from($map['type']);
         $this->name = $map['name'];
-        $this->avatar_url = $map['avatar_url'];
+        if(isset($map['avatar_url'])) {
+            $this->avatar_url = $map['avatar_url'];
+        }
         $this->setValue($map);
     }
 

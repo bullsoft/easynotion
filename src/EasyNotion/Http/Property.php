@@ -14,7 +14,7 @@ class Property
 
     public function get(string $id)
     {
-        $uri = "pages/{$this->page->id}/properties/{$id}";
+        $uri = "pages/{$this->page->id()}/properties/{$id}";
         return $this->client->get($uri)->result();
     }
 }

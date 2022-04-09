@@ -8,16 +8,12 @@ use EasyNotion\Property\Value as PropertyValue;
 
 class Page extends AbstractObject
 {
-    public Type $object = Type::Page;
-    // UUIDv4
-    public UUIDv4 $id;
-    public PartialUser $created_by;
-    // ISO8601 date and time
-    public string $created_time;
+    use MetaTrait;
 
-    public PartialUser $last_edited_by;
-    // ISO8601 date and time
-    public string $last_edited_time;
+    // Entity Type
+    protected Type $object = Type::Page;
+    // UUIDv4
+    protected readonly UUIDv4|string $id;
 
     public bool $archived;
     public null|FileObject|EmojiObject $icon;
@@ -38,37 +34,6 @@ class Page extends AbstractObject
              ->setProperties($map['properties'])
              ->setUrl($map['url'])
              ;
-    }
-
-    public function setCreatedBy(array $val): static
-    {
-        $this->created_by = new PartialUser(
-            Type::from($val['object']),
-            $val['id']
-        );
-        return $this;
-    }
-
-    public function setCreatedTime(string $val): static
-    {
-        $this->created_time = $val;
-        return $this;
-    }
-
-    public function setLastEditedBy(array $val): static 
-    {
-        $this->last_edited_by = new PartialUser(
-            Type::from($val['object']),
-            $val['id']
-        );
-        return $this;
-        return $this;
-    }
-
-    public function setLastEditedTime(string $val): static
-    {
-        $this->last_edited_time = $val;
-        return $this;
     }
 
     public function setProperties(array $map): static
