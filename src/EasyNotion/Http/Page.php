@@ -10,7 +10,7 @@ class Page
     {
     }
 
-    public function get(string $id)
+    public function get(string $id): EntityPage
     {
         $uri = "pages/{$id}";
         return $this->client->get($uri)->result();

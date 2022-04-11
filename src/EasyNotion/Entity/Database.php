@@ -6,6 +6,9 @@ use EasyNotion\Common\EmojiObject;
 use EasyNotion\Common\{UUIDv4, Collection};
 use EasyNotion\Entity\{Type, Reference};
 use EasyNotion\Property\Configuration;
+use EasyNotion\Http\{Client, Database as DbClient};
+use EasyNotion\Property\Filter;
+use EasyNotion\Property\Sort;
 
 class Database extends AbstractObject
 {
@@ -24,7 +27,7 @@ class Database extends AbstractObject
     public ParentObject $parent;
     public string $url;
 
-    public function __construct(array $map)
+    public function __construct(array $map, public readonly ?Client $client = null)
     {
         $this->id = new UUIDv4($map['id']);
         $this->setCreatedBy($map['created_by'])
@@ -70,8 +73,9 @@ class Database extends AbstractObject
         return $intance;
     }
 
-    public function get()
+    public function get(?Filter $filter = null, ?Sort $sort = null, int $pageSize = 20, ?string $start = null)
     {
-        
+        $dbClient = new DbClient($this->client);
+        return $dbClient->query($this->id, $filter, $sort, $pageSize, $start);
     }
 }

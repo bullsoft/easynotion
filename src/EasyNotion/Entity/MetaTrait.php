@@ -10,10 +10,7 @@ trait MetaTrait
 
     public function setCreatedBy(array $val): static
     {
-        $this->created_by = new PartialUser(
-            Type::from($val['object']),
-            $val['id']
-        );
+        $this->created_by = new PartialUser($val, $this->client);
         return $this;
     }
 
@@ -25,10 +22,7 @@ trait MetaTrait
 
     public function setLastEditedBy(array $val): static 
     {
-        $this->last_edited_by = new PartialUser(
-            Type::from($val['object']),
-            $val['id']
-        );
+        $this->last_edited_by = new PartialUser($val, $this->client);
         return $this;
     }
 

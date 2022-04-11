@@ -14,6 +14,8 @@ use EasyNotion\Entity\Block\Type\{
     NumberedListItem, SyncedBlock, Table,
     Template, ToDo, Toggle,
 };
+use EasyNotion\Http\{Client, Block as BlockClient};
+
 class Block extends AbstractObject implements UnionInterface
 {
     use MetaTrait;
@@ -56,7 +58,7 @@ class Block extends AbstractObject implements UnionInterface
     public ?SyncedBlock $synced_block;
     public ?Table $table;
 
-    public function __construct(array $map)
+    public function __construct(array $map, public readonly ?Client $client = null)
     {
         $this->id = new UUIDv4($map['id']);
         $this->type = BlockType::from($map['type']);
@@ -107,5 +109,11 @@ class Block extends AbstractObject implements UnionInterface
     {
         $key = $this->type->value;
         return $this->{$key};
+    }
+
+    public function children(int $pageSize = 20, ?string $start = null)
+    {
+        $blockClient = new BlockClient($this->client);
+        return $blockClient->children($this->id, $pageSize, $start);
     }
 }

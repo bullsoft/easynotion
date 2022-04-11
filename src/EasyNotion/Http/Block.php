@@ -10,7 +10,7 @@ class Block
     {
     }
 
-    public function get(string $id)
+    public function get(string $id): EntityBlock
     {
         $uri = "blocks/{$id}";
         return $this->client->get($uri)->result();

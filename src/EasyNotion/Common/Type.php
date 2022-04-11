@@ -7,7 +7,7 @@ enum Type: string implements TypeInterface
     case FileObject = 'file';
     case EmojiObject = 'emoji';
 
-    public function resolve(array $map)
+    public function resolve(array|string $map)
     {
         return match($this) {
             self::RichTextObject => new RichTextObject($map),

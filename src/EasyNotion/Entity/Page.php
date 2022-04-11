@@ -5,6 +5,10 @@ use EasyNotion\Common\FileObject;
 use EasyNotion\Common\EmojiObject;
 use EasyNotion\Common\UUIDv4;
 use EasyNotion\Property\Value as PropertyValue;
+use EasyNotion\Http\{
+    Client, Block as BlockClient, Page as PageClient,
+    Property as PropClient,
+};
 
 class Page extends AbstractObject
 {
@@ -22,7 +26,7 @@ class Page extends AbstractObject
     public ParentObject $parent;
     public $url;
 
-    public function __construct(array $map)
+    public function __construct(array $map, public readonly ?Client $client = null)
     {
         $this->id = new UUIDv4($map['id']);
         $this->archived = $map['archived'];
@@ -46,7 +50,7 @@ class Page extends AbstractObject
 
     public function setParent(array $map): static
     {
-        $this->parent = new ParentObject($map);
+        $this->parent = new ParentObject($map, $this->client);
         return $this;
     }
 
@@ -62,8 +66,24 @@ class Page extends AbstractObject
         return $intance;
     }
 
-    public function get()
+    /**
+     * Page is a special Block
+     */
+    public function get(): Block
     {
-        
+        $blockClient = new BlockClient($this->client);
+        return $blockClient->get($this->id);
+    }
+
+    public function blocks(int $pageSize = 20, ?string $start = null)
+    {
+        $blockClient = new BlockClient($this->client);
+        return $blockClient->children($this->id, $pageSize, $start);
+    }
+
+    public function properties(string $id)
+    {
+        $propClient = new PropClient($this->client, $this);
+        return $propClient->get($id);
     }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace EasyNotion\Entity;
 
+use EasyNotion\Http\{Client, Page as PageClient, Database as DbClient};
+
 class ParentObject
 {
     protected ParentType $type;
@@ -8,7 +10,7 @@ class ParentObject
     protected ?string $database_id;
     protected ?string $workspace;
 
-    public function __construct(array $map)
+    public function __construct(array $map, public readonly ?Client $client = null)
     {
         $this->type = ParentType::from($map['type']);
         $this->setValue($map);
@@ -29,5 +31,20 @@ class ParentObject
     {
         $key = $this->type->value;
         return $this->{$key};
+    }
+
+    private function client(): PageClient|DbClient|null
+    {
+        return match($this->type) {
+            ParentType::Page      => new PageClient($this->client),
+            ParentType::Database  => new DbClient($this->client),
+            default => null,
+        };
+    }
+
+    public function get()
+    {
+        $instance = $this->client();
+        return $instance?->get($this->getValue());
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace EasyNotion\Entity;
 use EasyNotion\Common\UUIDv4;
+use EasyNotion\Http\{Client, User as UserClient};
 
 class PartialUser extends AbstractObject
 {
@@ -9,23 +10,15 @@ class PartialUser extends AbstractObject
     // UUIDv4
     protected readonly UUIDv4|string $id;
 
-    public function __construct(string|array|Type $object, ?string $id = null)
+    public function __construct(array $map, public readonly ?Client $client = null)
     {
-        if(is_string($object)) {
-            $this->object = Type::from($object);
-            $this->id = new UUIDv4($id);
-        } elseif(is_array($object)) {
-            $map = $object;
-            $this->object = Type::from($map['object']);
-            $this->id = new UUIDv4($map['id']);
-        } else {
-            $this->object = $object;
-            $this->id = new UUIDv4($id);
-        }
+        $this->object = Type::from($map['object']);
+        $this->id = new UUIDv4($map['id']);
     }
 
-    public function resolve(array $map)
+    public function get(): User
     {
-        return new User($map);
+        $userClient = new UserClient($this->client);
+        return $userClient->get($this->id);
     }
 }

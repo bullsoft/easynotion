@@ -11,11 +11,11 @@ class Factory
     {
         return match($data['object']) {
             'list' => new Collection($data, $client),
-            'user' => new User($data),
-            'database' => new Database($data),
-            'page' => new Page($data),
-            'property_item' => new PropertyItem($data),
-            'block' => new Block($data),
+            'user' => new User($data, $client),
+            'database' => new Database($data, $client),
+            'page' => new Page($data, $client),
+            'property_item' => new PropertyItem($data, $client),
+            'block' => new Block($data, $client),
         };
     }
 }

@@ -12,14 +12,7 @@ enum Type: string implements TypeInterface
     case PropertyItem = 'property_item';
     case PageOrDatabase = 'page_or_database';
 
-    public function resolve(array $map)
+    public function resolve(array|string $val)
     {
-        return match($this) {
-            self::Database => new Database($map),
-            self::Page  => new Page($map),
-            self::Block => new Block($map),
-            self::User  => new User($map),
-            self::PropertyItem => new PropertyItem($map),
-        };
     }
 }
