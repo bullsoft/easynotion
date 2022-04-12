@@ -1,8 +1,10 @@
 <?php
 namespace EasyNotion\Property;
+
+use EasyNotion\Common\Base;
 use EasyNotion\Common\UnionInterface;
 
-class Value implements UnionInterface
+class Value extends Base implements UnionInterface
 {
     use BaseValue;
 

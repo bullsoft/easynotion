@@ -1,9 +1,10 @@
 <?php
 namespace EasyNotion\Entity;
-use EasyNotion\Common\UUIDv4;
-use EasyNotion\Http\Client;
 
-abstract class AbstractObject 
+use EasyNotion\Common\Base;
+use EasyNotion\Common\UUIDv4;
+
+abstract class AbstractObject extends Base
 {
     protected Type $object;
     protected readonly UUIDv4|string $id;
@@ -21,12 +22,5 @@ abstract class AbstractObject
     public function id(): UUIDv4|string
     {
         return $this->id;
-    }
-
-    public function __debugInfo() 
-    {
-        $debug = get_object_vars($this);
-        unset($debug['client']);
-        return $debug;
     }
 }

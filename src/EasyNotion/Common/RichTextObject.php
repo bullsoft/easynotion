@@ -4,7 +4,7 @@ use EasyNotion\Common\RichTextObject\Type;
 use EasyNotion\Common\RichTextObject\Annotation;
 use EasyNotion\Common\RichTextObject\Type\{Text, Mention, Equation};
 
-class RichTextObject implements UnionInterface
+class RichTextObject extends Base implements UnionInterface
 {
     protected string $plain_text;
     protected ?string $href;

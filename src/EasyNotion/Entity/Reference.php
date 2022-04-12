@@ -1,13 +1,14 @@
 <?php
 namespace EasyNotion\Entity;
 
+use EasyNotion\Common\Base;
 use EasyNotion\Common\UnionInterface;
 use EasyNotion\Http\{
     Client, Page as PageClient, Block as BlockClient, 
     Database as DbClient, User as UserClient
 };
 
-class Reference implements UnionInterface
+class Reference extends Base implements UnionInterface
 {
     public string $type;
     private Type $_type;

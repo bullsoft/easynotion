@@ -4,7 +4,7 @@ use EasyNotion\Common\FileObject\Type as FileType;
 use EasyNotion\Common\FileObject\Type\External;
 use EasyNotion\Common\FileObject\Type\File;
 
-class FileObject implements UnionInterface
+class FileObject extends Base implements UnionInterface
 {
     public FileType $type;
     public ?string $name;

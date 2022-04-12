@@ -1,9 +1,10 @@
 <?php
 namespace EasyNotion\Entity;
 
+use EasyNotion\Common\Base;
 use EasyNotion\Http\{Client, Page as PageClient, Database as DbClient};
 
-class ParentObject
+class ParentObject extends Base
 {
     protected ParentType $type;
     protected ?string $page_id;

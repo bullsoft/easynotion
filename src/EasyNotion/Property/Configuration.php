@@ -1,5 +1,7 @@
 <?php
 namespace EasyNotion\Property;
+
+use EasyNotion\Common\Base;
 use EasyNotion\Property\Type;
 use EasyNotion\Property\Configuration\{
     Number, Select, MultiSelect, Formula,
@@ -8,7 +10,7 @@ use EasyNotion\Property\Configuration\{
 use EasyNotion\Property\Sort\Direction;
 use EasyNotion\Common\UnionInterface;
 
-class Configuration implements UnionInterface
+class Configuration extends Base implements UnionInterface
 {
     public string $id;
     public Type $type;

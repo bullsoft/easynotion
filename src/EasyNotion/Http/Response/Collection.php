@@ -1,6 +1,7 @@
 <?php
 namespace EasyNotion\Http\Response;
 
+use EasyNotion\Common\Base;
 use EasyNotion\Http\Factory;
 use EasyNotion\Entity\Type;
 use EasyNotion\Entity\PropertyItem;
@@ -8,7 +9,7 @@ use EasyNotion\Http\Client;
 use EasyNotion\Http\Request\Pagination;
 use EasyNotion\Common\CollectionTrait;
 
-class Collection implements \JsonSerializable, \Countable, \IteratorAggregate
+class Collection extends Base implements \JsonSerializable, \Countable, \IteratorAggregate
 {
     use CollectionTrait;
 

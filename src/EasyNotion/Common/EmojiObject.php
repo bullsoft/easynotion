@@ -2,7 +2,7 @@
 namespace EasyNotion\Common;
 use EasyNotion\Common\EmojiObject\Type;
 
-class EmojiObject implements UnionInterface
+class EmojiObject extends Base implements UnionInterface
 {
     public Type $type;
     public string $emoji;
