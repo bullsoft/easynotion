@@ -1,8 +1,14 @@
 <?php
 namespace EasyNotion\Entity\User;
 
-enum Type: string
+use EasyNotion\Common\TypeInterface;
+
+enum Type: string implements TypeInterface
 {
     case Person = 'person';
     case Bot = 'bot';
+
+    public function resolve(array|string $val)
+    {
+    }
 }

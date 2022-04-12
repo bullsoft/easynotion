@@ -1,8 +1,10 @@
 <?php
 namespace EasyNotion\Entity\User;
+
+use EasyNotion\Common\UnionInterface;
 use EasyNotion\Entity\User;
 
-class Owner 
+class Owner implements UnionInterface
 {
     public TypeOwner $type;
     public ?bool $workspace;
