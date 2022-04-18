@@ -2,9 +2,10 @@
 namespace EasyNotion\Entity;
 
 use EasyNotion\Common\Base;
+use EasyNotion\Common\UnionInterface;
 use EasyNotion\Http\{Client, Page as PageClient, Database as DbClient};
 
-class ParentObject extends Base
+class ParentObject extends Base implements UnionInterface
 {
     protected ParentType $type;
     protected ?string $page_id;
@@ -47,5 +48,10 @@ class ParentObject extends Base
     {
         $instance = $this->client();
         return $instance?->get($this->getValue());
+    }
+
+    public function type(): ParentType
+    {
+        return $this->type;
     }
 }

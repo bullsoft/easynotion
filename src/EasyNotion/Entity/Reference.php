@@ -53,4 +53,9 @@ class Reference extends Base implements UnionInterface
         $instance = $this->client();
         return $instance?->get($this->getValue());
     }
+
+    public function type(): Type
+    {
+        return $this->_type;
+    }
 }

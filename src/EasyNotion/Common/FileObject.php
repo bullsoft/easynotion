@@ -38,4 +38,9 @@ class FileObject extends Base implements UnionInterface
         $key = $this->type->value;
         return $this->{$key};
     }
+
+    public function type(): FileType
+    {
+        return $this->type;
+    }
 }

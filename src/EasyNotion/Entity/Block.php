@@ -116,4 +116,9 @@ class Block extends AbstractObject implements UnionInterface
         $blockClient = new BlockClient($this->client);
         return $blockClient->children($this->id, $pageSize, $start);
     }
+
+    public function type(): BlockType
+    {
+        return $this->type;
+    }
 }

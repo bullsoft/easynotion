@@ -44,4 +44,9 @@ class RichTextObject extends Base implements UnionInterface
         $key = $this->type->value;
         return $this->{$key};
     }
+
+    public function type(): Type
+    {
+        return $this->type;
+    }
 }

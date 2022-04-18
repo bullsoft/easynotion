@@ -27,4 +27,9 @@ class Mention implements UnionInterface
     {
         return ;
     }
+
+    public function type(): TypeMention
+    {
+        return $this->type;
+    }
 }

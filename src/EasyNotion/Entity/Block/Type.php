@@ -1,7 +1,9 @@
 <?php
 namespace EasyNotion\Entity\Block;
 
-enum Type: string
+use EasyNotion\Common\TypeInterface;
+
+enum Type: string implements TypeInterface
 {
     case Paragraph = 'paragraph';
     case BulletedListItem = 'bulleted_list_item';
@@ -33,4 +35,8 @@ enum Type: string
     case Header2 = 'heading_2';
     case Header3 = 'heading_3';
     case Table = 'table';
+
+    public function resolve(array|string $val)
+    {
+    }
 }

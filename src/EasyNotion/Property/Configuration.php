@@ -83,6 +83,16 @@ class Configuration extends Base implements UnionInterface
         return $this->name;
     }
 
+    public function type(): Type
+    {
+        return $this->type;
+    }
+
+    public function id(): string
+    {
+        return $this->id;
+    }
+
     public function filter()
     {
         return Filter::make($this->name, $this->type);

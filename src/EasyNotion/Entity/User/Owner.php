@@ -30,4 +30,9 @@ class Owner implements UnionInterface
         $key = $this->type->value;
         return $this->{$key};
     }
+
+    public function type(): TypeOwner
+    {
+        return $this->type;
+    }
 }

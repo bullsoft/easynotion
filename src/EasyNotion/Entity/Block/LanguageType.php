@@ -1,7 +1,9 @@
 <?php
 namespace EasyNotion\Entity\Block;
 
-enum LanguageType: string 
+use EasyNotion\Common\TypeInterface;
+
+enum LanguageType: string implements TypeInterface
 {
     case Abap = 'abap';
     case Arduino = 'arduino';
@@ -75,4 +77,8 @@ enum LanguageType: string
     case Xml = 'xml';
     case Yaml = 'yaml';
     case JavaOrCOrCppOrCSharp = 'java/c/c++/c#';
+
+    public function resolve(array|string $val)
+    {
+    }
 }

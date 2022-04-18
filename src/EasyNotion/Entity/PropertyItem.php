@@ -28,4 +28,9 @@ class PropertyItem extends AbstractObject implements UnionInterface
         }
         $this->setValue($map);
     }
+
+    public function type(): PropertyType
+    {
+        return $this->type;
+    }
 }

@@ -49,4 +49,9 @@ class User extends AbstractObject implements UnionInterface
         $key = $this->type->value;
         return $this->{$key};
     }
+
+    public function type(): UserType
+    {
+        return $this->type;
+    }
 }

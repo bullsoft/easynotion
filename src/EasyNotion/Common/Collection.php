@@ -11,6 +11,9 @@ class Collection implements \JsonSerializable, \Countable, \IteratorAggregate
 
     public Type $type;
 
+    /**
+     * @param Array<string|TypeInterface> $list
+     */
     public function __construct(string|TypeInterface $type, array $list)
     {
         if(is_string($type)) {

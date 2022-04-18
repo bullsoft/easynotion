@@ -1,9 +1,9 @@
 <?php
 namespace EasyNotion\Common\RichTextObject;
 
-use EasyNotion\Common\RichTextObject\Type\Text;
+use EasyNotion\Common\TypeInterface;
 
-enum Type: string
+enum Type: string implements TypeInterface
 {
     case Text = 'text';
     case Mention = 'mention';

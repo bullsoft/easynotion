@@ -5,4 +5,5 @@ interface UnionInterface
 {
     public function setValue(array $map): static;
     public function getValue();
+    public function type(): TypeInterface;
 }

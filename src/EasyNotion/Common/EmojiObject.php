@@ -23,4 +23,9 @@ class EmojiObject extends Base implements UnionInterface
     {
         return $this->emoji;
     }
+
+    public function type(): Type
+    {
+        return $this->type;
+    }
 }

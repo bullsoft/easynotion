@@ -18,7 +18,17 @@ class Value extends Base implements UnionInterface
         $this->setValue($map);
     }
 
+    public function id(): string
+    {
+        return $this->id;
+    }
+
     public function getType(): Type
+    {
+        return $this->type;
+    }
+
+    public function type(): Type
     {
         return $this->type;
     }

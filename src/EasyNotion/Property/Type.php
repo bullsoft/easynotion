@@ -1,7 +1,9 @@
 <?php
 namespace EasyNotion\Property;
 
-enum Type: string
+use EasyNotion\Common\TypeInterface;
+
+enum Type: string implements TypeInterface
 {
     case Title = 'title';
     case RichText = 'rich_text';
@@ -24,4 +26,8 @@ enum Type: string
     case CreatedBy = 'created_by';
     case LastEditedTime = 'last_edited_time';
     case LastEditedBy = 'last_edited_by';
+
+    public function resolve(array|string $val)
+    {
+    }
 }
