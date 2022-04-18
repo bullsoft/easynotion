@@ -21,6 +21,11 @@ class UUIDv4 implements \Stringable, \JsonSerializable
         return $object;
     }
 
+    public static function format(string $val): string
+    {
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split($val, 4));
+    }
+
     public function get(): string
     {
         return $this->value;
