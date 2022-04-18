@@ -33,7 +33,8 @@
       "mockery/mockery": "^1.4.4",
       "phpstan/phpstan": "^1.0",
       "phpunit/phpunit": "^9.5",
-      "vimeo/psalm": "^4.10"
+      "vimeo/psalm": "^4.10",
+        "pestphp/pest": "^1.21"
     },
     "autoload": {
       "psr-4": {
@@ -47,7 +48,8 @@
     },
     "config": {
       "allow-plugins": {
-        "composer/package-versions-deprecated": true
-      }
+            "composer/package-versions-deprecated": true,
+            "pestphp/pest-plugin": true
+        }
     }
   }
