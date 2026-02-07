@@ -29,7 +29,7 @@ trait BaseValue
     public ?Rollup $rollup;
     // @Collection<User>
     public ?Collection $people;
-    // @Collectioin<FileObject>
+    // @Collection<FileObject>
     public ?Collection $files;
 
     public ?bool $checkbox;

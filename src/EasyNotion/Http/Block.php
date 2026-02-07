@@ -24,4 +24,26 @@ class Block
             'query' => $page->__toArray()
         ])->result();
     }
+
+    public function append(string $blockId, array $children): EntityBlock
+    {
+        $uri = "blocks/{$blockId}/children";
+        return $this->client->patch($uri, [
+            'body' => json_encode(['children' => $children]),
+        ])->result();
+    }
+
+    public function update(string $id, array $block): EntityBlock
+    {
+        $uri = "blocks/{$id}";
+        return $this->client->patch($uri, [
+            'body' => json_encode($block),
+        ])->result();
+    }
+
+    public function delete(string $id): EntityBlock
+    {
+        $uri = "blocks/{$id}";
+        return $this->client->delete($uri)->result();
+    }
 }

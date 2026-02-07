@@ -22,6 +22,7 @@ class Element
     public ?Heading $heading_2;
     public ?Heading $heading_3;
     public ?Callout $callout;
+    public ?Quote $quote;
     public ?BulletedListItem $bulleted_list_item;
     public ?NumberedListItem $numbered_list_item;
     public ?ToDo $to_do;
@@ -70,23 +71,23 @@ class Element
             Type::Code   => $this->code = new Code($val),
             Type::ChildPage     => $this->child_page = new ChildPage($val),
             Type::ChildDatabase => $this->child_database = new ChildDatabase($val),
-            Type::Embed => $this->embed = new Link($val['url']),
-            Type::Image => $this->image = new FileObject($val),
-            Type::Video => $this->video = new FileObject($val),
-            Type::File  => $this->file = new FileObject($val),
-            Type::Pdf   => $this->pdf = new FileObject($val),
-            Type::Bookmark => $this->bookmark = new Link($val['url']),
-            Type::Equation => $this->equation = new Equation($val['expression']),
-            Type::Divider  => $this->divider = new \stdClass(),
+            Type::Embed           => $this->embed = new Link($val['url']),
+            Type::Image           => $this->image = new FileObject($val),
+            Type::Video           => $this->video = new FileObject($val),
+            Type::File            => $this->file = new FileObject($val),
+            Type::Pdf             => $this->pdf = new FileObject($val),
+            Type::Bookmark        => $this->bookmark = new Link($val['url']),
+            Type::Equation        => $this->equation = new Equation($val['expression']),
+            Type::Divider         => $this->divider = new \stdClass(),
             Type::TableOfContents => $this->table_of_contents = new \stdClass(),
-            Type::Breadcrumb  => $this->breadcrumb = new \stdClass(),
-            Type::ColumnList  => $this->column_list = new ColumnList($val),
-            Type::Column      => $this->column = new Column($val),
-            Type::LinkPreview => $this->link_preview = new Link($val['url']),
-            Type::Template    => $this->template = new Template($val),
-            Type::LinkToPage  => $this->link_to_page = new Reference($val),
-            Type::SyncedBlock => $this->synced_block = new SyncedBlock($val),
-            Type::Table       => $this->table = new Table($val),
+            Type::Breadcrumb      => $this->breadcrumb = new \stdClass(),
+            Type::ColumnList      => $this->column_list = new ColumnList($val),
+            Type::Column          => $this->column = new Column($val),
+            Type::LinkPreview     => $this->link_preview = new Link($val['url']),
+            Type::Template        => $this->template = new Template($val),
+            Type::LinkToPage      => $this->link_to_page = new Reference($val),
+            Type::SyncedBlock     => $this->synced_block = new SyncedBlock($val),
+            Type::Table           => $this->table = new Table($val),
 
         };
         return $this;

@@ -19,6 +19,14 @@ class Database
         return $this->client->get($uri)->result();
     }
 
+    public function list(int $pageSize = 20, ?string $start = null)
+    {
+        $page = new Request\Pagination($start, $pageSize);
+        return $this->client->get('databases', [
+            'query' => $page->__toArray()
+        ])->result();
+    }
+
     public function query(string $id, ?Filter $filter = null, ?Sort $sort = null, int $pageSize = 20, ?string $start = null)
     {
         $page = new Request\Pagination($start, $pageSize);
@@ -26,7 +34,7 @@ class Database
         if($filter !== null) {
             $opts += $filter->__toArray();
         }
-        if(!empty($sorts)) {
+        if($sort !== null) {
             $opts += $sort->__toArray();
         }
         $uri = "databases/{$id}/query";

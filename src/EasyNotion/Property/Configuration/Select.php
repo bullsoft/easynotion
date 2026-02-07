@@ -4,7 +4,7 @@ use EasyNotion\Property\Value\Select as SelectValue;
 
 class Select
 {
-    // array of SelectValue
+    // Array<SelectValue>
     public array $options;
 
     public function __construct(array $list)
